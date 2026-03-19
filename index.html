@@ -1,0 +1,4297 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Добро вместе - Платформа для волонтеров</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #4CAF50;
+            --primary-dark: #388E3C;
+            --secondary-color: #2196F3;
+            --secondary-dark: #1976D2;
+            --accent-color: #FF9800;
+            --accent-dark: #F57C00;
+            --light-color: #f8f9fa;
+            --dark-color: #333333;
+            --gray-color: #6c757d;
+            --light-gray: #e9ecef;
+            --danger-color: #f44336;
+            --success-color: #4CAF50;
+            --warning-color: #ff9800;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --shadow-hover: 0 8px 15px rgba(0, 0, 0, 0.2);
+            --border-radius: 8px;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-color: #f9f9f9;
+            color: var(--dark-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Roboto', sans-serif;
+            font-weight: 600;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-title h2 {
+            font-size: 2.2rem;
+            color: var(--dark-color);
+            margin-bottom: 15px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title h2:after {
+            content: '';
+            position: absolute;
+            width: 70px;
+            height: 3px;
+            background-color: var(--primary-color);
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .section-title p {
+            color: var(--gray-color);
+            max-width: 700px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            border: none;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: var(--transition);
+            text-align: center;
+            text-decoration: none;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn:active {
+            transform: translateY(2px);
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .btn-secondary {
+            background-color: var(--secondary-color);
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--secondary-dark);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+        }
+
+        .btn-outline:hover {
+            background-color: var(--primary-color);
+            color: white;
+            box-shadow: var(--shadow-hover);
+        }
+
+        .btn-accent {
+            background-color: var(--accent-color);
+            color: white;
+        }
+
+        .btn-accent:hover {
+            background-color: var(--accent-dark);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .btn-sm {
+            padding: 8px 16px;
+            font-size: 0.9rem;
+        }
+
+        .btn-lg {
+            padding: 16px 32px;
+            font-size: 1.1rem;
+        }
+
+        .btn-block {
+            display: block;
+            width: 100%;
+        }
+
+        .btn-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        /* Header */
+        header {
+            background-color: white;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            transition: var(--transition);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            font-size: 2.2rem;
+            color: var(--primary-color);
+            background-color: rgba(76, 175, 80, 0.1);
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo-text h1 {
+            font-size: 1.5rem;
+            color: var(--dark-color);
+            margin-bottom: 3px;
+        }
+
+        .logo-text p {
+            font-size: 0.8rem;
+            color: var(--gray-color);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--dark-color);
+            font-weight: 500;
+            padding: 8px 0;
+            position: relative;
+            transition: var(--transition);
+        }
+
+        nav a:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary-color);
+            bottom: 0;
+            left: 0;
+            transition: var(--transition);
+        }
+
+        nav a:hover, nav a.active {
+            color: var(--primary-color);
+        }
+
+        nav a:hover:after, nav a.active:after {
+            width: 100%;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .user-menu {
+            position: relative;
+        }
+
+        .user-toggle {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            padding: 8px 12px;
+            border-radius: var(--border-radius);
+            transition: var(--transition);
+        }
+
+        .user-toggle:hover {
+            background-color: var(--light-gray);
+        }
+
+        .user-avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background-color: var(--secondary-color);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        .user-dropdown {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            width: 220px;
+            background-color: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-hover);
+            padding: 15px 0;
+            display: none;
+            z-index: 100;
+        }
+
+        .user-menu:hover .user-dropdown {
+            display: block;
+        }
+
+        .user-dropdown a {
+            display: block;
+            padding: 10px 20px;
+            color: var(--dark-color);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .user-dropdown a:hover {
+            background-color: var(--light-gray);
+            color: var(--primary-color);
+        }
+
+        .user-dropdown .divider {
+            height: 1px;
+            background-color: var(--light-gray);
+            margin: 10px 0;
+        }
+
+        .mobile-toggle {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--dark-color);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, rgba(76, 175, 80, 0.9), rgba(33, 150, 243, 0.9)), url('https://images.unsplash.com/photo-1551632811-561732d1e306?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 100px 0;
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h2 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+
+        .hero-search {
+            display: flex;
+            max-width: 600px;
+            margin: 40px auto 0;
+            background-color: white;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow-hover);
+        }
+
+        .hero-search input {
+            flex: 1;
+            padding: 15px 20px;
+            border: none;
+            font-size: 1rem;
+            outline: none;
+        }
+
+        .hero-search button {
+            border-radius: 0;
+            border: none;
+        }
+
+        .stats-bar {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 60px;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        /* Features Section */
+        .features {
+            padding: 80px 0;
+            background-color: white;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .feature-card {
+            background-color: var(--light-color);
+            border-radius: var(--border-radius);
+            padding: 35px 30px;
+            text-align: center;
+            transition: var(--transition);
+            border: 1px solid transparent;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-hover);
+            border-color: var(--primary-color);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            display: inline-block;
+            width: 80px;
+            height: 80px;
+            line-height: 80px;
+            background-color: rgba(76, 175, 80, 0.1);
+            border-radius: 50%;
+        }
+
+        .feature-card h3 {
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+
+        /* 3D Gallery */
+        .gallery-3d {
+            padding: 80px 0;
+            background-color: var(--light-color);
+        }
+
+        .gallery-container {
+            position: relative;
+            width: 100%;
+            height: 500px;
+            perspective: 1200px;
+            margin: 0 auto;
+        }
+
+        .carousel {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            transform-style: preserve-3d;
+        }
+
+        .carousel-item {
+            position: absolute;
+            width: 280px;
+            height: 380px;
+            left: 50%;
+            top: 50%;
+            margin-left: -140px;
+            margin-top: -190px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+            transition: transform 0.5s ease;
+        }
+
+        .carousel-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .carousel-item:hover img {
+            transform: scale(1.05);
+        }
+
+        .carousel-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0,0,0,0.8));
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .carousel-nav {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .carousel-btn {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background-color: white;
+            border: none;
+            box-shadow: var(--shadow);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: var(--primary-color);
+            transition: var(--transition);
+        }
+
+        .carousel-btn:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .carousel-dots {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .carousel-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: #ccc;
+            border: none;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .carousel-dot.active {
+            background-color: var(--primary-color);
+        }
+
+        /* Events Section */
+        .events {
+            padding: 80px 0;
+            background-color: white;
+        }
+
+        .events-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .events-filter {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 8px 16px;
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 0.9rem;
+        }
+
+        .filter-btn.active, .filter-btn:hover {
+            background-color: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+
+        .events-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 30px;
+        }
+
+        .event-card {
+            background-color: white;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            border: 1px solid #eee;
+        }
+
+        .event-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .event-badge {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            z-index: 2;
+        }
+
+        .badge-online {
+            background-color: var(--secondary-color);
+            color: white;
+        }
+
+        .badge-offline {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .badge-krasnodar {
+            background-color: var(--accent-color);
+            color: white;
+        }
+
+        .event-image {
+            height: 180px;
+            background-color: #ddd;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+
+        .event-content {
+            padding: 20px;
+        }
+
+        .event-date {
+            display: inline-block;
+            background-color: rgba(76, 175, 80, 0.1);
+            color: var(--primary-color);
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .event-card h3 {
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+            line-height: 1.4;
+        }
+
+        .event-card p {
+            color: var(--gray-color);
+            margin-bottom: 15px;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .event-meta {
+            display: flex;
+            justify-content: space-between;
+            color: #888;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+
+        .event-progress {
+            margin-bottom: 15px;
+        }
+
+        .progress-bar {
+            height: 8px;
+            background-color: var(--light-gray);
+            border-radius: 4px;
+            overflow: hidden;
+            margin-bottom: 5px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background-color: var(--primary-color);
+            border-radius: 4px;
+        }
+
+        .progress-text {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.85rem;
+            color: var(--gray-color);
+        }
+
+        /* Organizations Section */
+        .organizations {
+            padding: 80px 0;
+            background-color: var(--light-color);
+        }
+
+        .org-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .org-card {
+            background-color: white;
+            border-radius: var(--border-radius);
+            padding: 25px;
+            box-shadow: var(--shadow);
+            text-align: center;
+            transition: var(--transition);
+            border: 1px solid #eee;
+        }
+
+        .org-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .org-logo {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background-color: var(--light-gray);
+            margin: 0 auto 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: var(--primary-color);
+            font-weight: bold;
+            border: 3px solid white;
+            box-shadow: 0 0 0 3px var(--primary-color);
+        }
+
+        .org-card h3 {
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+
+        .org-card p {
+            color: var(--gray-color);
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .org-rating {
+            color: var(--accent-color);
+            margin-bottom: 15px;
+        }
+
+        .org-stats {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #eee;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-weight: bold;
+            font-size: 1.2rem;
+            color: var(--primary-color);
+        }
+
+        .stat-label {
+            font-size: 0.8rem;
+            color: var(--gray-color);
+        }
+
+        /* Krasnodar Region Section */
+        .krasnodar-region {
+            padding: 80px 0;
+            background: linear-gradient(135deg, #4CAF50, #2196F3);
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .krasnodar-region:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://images.unsplash.com/photo-1551632811-561732d1e306?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.1;
+        }
+
+        .krasnodar-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .krasnodar-map {
+            position: relative;
+            height: 400px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .map-container {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            background: #e6f2ff;
+        }
+
+        .city-marker {
+            position: absolute;
+            width: 16px;
+            height: 16px;
+            background-color: var(--accent-color);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            cursor: pointer;
+            z-index: 2;
+            box-shadow: 0 0 0 4px rgba(255, 152, 0, 0.3);
+            transition: var(--transition);
+        }
+
+        .city-marker:hover {
+            transform: translate(-50%, -50%) scale(1.2);
+            box-shadow: 0 0 0 6px rgba(255, 152, 0, 0.5);
+        }
+
+        .city-marker.active {
+            transform: translate(-50%, -50%) scale(1.3);
+            box-shadow: 0 0 0 8px rgba(255, 152, 0, 0.7);
+        }
+
+        .city-marker.krasnodar { top: 60%; left: 50%; }
+        .city-marker.sochi { top: 40%; left: 65%; }
+        .city-marker.novorossiysk { top: 50%; left: 45%; }
+        .city-marker.armavir { top: 65%; left: 55%; }
+        .city-marker.yeysk { top: 70%; left: 40%; }
+
+        .city-info {
+            position: absolute;
+            background: white;
+            color: var(--dark-color);
+            padding: 15px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-hover);
+            width: 200px;
+            display: none;
+            z-index: 10;
+            font-size: 0.9rem;
+        }
+
+        .city-info h4 {
+            color: var(--primary-color);
+            margin-bottom: 5px;
+        }
+
+        .city-info p {
+            color: var(--gray-color);
+            font-size: 0.85rem;
+        }
+
+        .city-events {
+            margin-top: 10px;
+            font-weight: 600;
+            color: var(--secondary-color);
+        }
+
+        .city-marker.active .city-info {
+            display: block;
+        }
+
+        /* Blog Section */
+        .blog {
+            padding: 80px 0;
+            background-color: white;
+        }
+
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .blog-card {
+            background-color: white;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            border: 1px solid #eee;
+        }
+
+        .blog-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .blog-image {
+            height: 180px;
+            background-color: #ddd;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .blog-content {
+            padding: 20px;
+        }
+
+        .blog-category {
+            display: inline-block;
+            padding: 3px 10px;
+            background-color: rgba(76, 175, 80, 0.1);
+            color: var(--primary-color);
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .blog-date {
+            color: var(--gray-color);
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .blog-card h3 {
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+            line-height: 1.4;
+        }
+
+        .blog-card p {
+            color: var(--gray-color);
+            margin-bottom: 15px;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        /* About Section */
+        .about {
+            padding: 80px 0;
+            background-color: var(--light-color);
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .about-text h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: var(--dark-color);
+        }
+
+        .about-text p {
+            margin-bottom: 20px;
+            color: var(--gray-color);
+            line-height: 1.6;
+        }
+
+        .about-stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .about-stat {
+            text-align: center;
+            padding: 20px;
+            background-color: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .about-stat:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .about-stat .stat-value {
+            font-size: 2.2rem;
+            margin-bottom: 5px;
+            color: var(--primary-color);
+            font-weight: 700;
+        }
+
+        .about-image {
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow-hover);
+        }
+
+        .about-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .modal-content {
+            background-color: white;
+            border-radius: var(--border-radius);
+            width: 90%;
+            max-width: 600px;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            animation: slideUp 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #888;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: var(--transition);
+            z-index: 1;
+        }
+
+        .close-modal:hover {
+            background-color: var(--light-gray);
+            color: var(--danger-color);
+        }
+
+        .modal-header {
+            padding: 25px 30px 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .modal-body {
+            padding: 25px 30px;
+        }
+
+        .modal-footer {
+            padding: 15px 30px 25px;
+            border-top: 1px solid #eee;
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--dark-color);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: var(--border-radius);
+            font-size: 1rem;
+            transition: var(--transition);
+            font-family: 'Open Sans', sans-serif;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.2);
+        }
+
+        textarea.form-control {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .form-select {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%23333' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 15px center;
+            background-size: 12px;
+            padding-right: 40px;
+        }
+
+        .form-check {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .form-check input {
+            width: 18px;
+            height: 18px;
+        }
+
+        .form-check label {
+            margin-bottom: 0;
+            font-weight: normal;
+        }
+
+        /* Chat Section */
+        .chat-container {
+            display: none;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 350px;
+            height: 500px;
+            background-color: white;
+            border-radius: var(--border-radius);
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.15);
+            z-index: 1000;
+            flex-direction: column;
+            overflow: hidden;
+            animation: slideInUp 0.3s ease;
+        }
+
+        @keyframes slideInUp {
+            from { transform: translateY(100px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .chat-header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .chat-header h3 {
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .chat-close {
+            cursor: pointer;
+            font-size: 1.2rem;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: var(--transition);
+        }
+
+        .chat-close:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .chat-status {
+            font-size: 0.8rem;
+            opacity: 0.9;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: #4caf50;
+        }
+
+        .chat-messages {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            background-color: #fafafa;
+        }
+
+        .message {
+            padding: 12px 15px;
+            border-radius: 18px;
+            max-width: 80%;
+            word-wrap: break-word;
+            line-height: 1.4;
+            position: relative;
+        }
+
+        .message.sent {
+            align-self: flex-end;
+            background-color: var(--primary-color);
+            color: white;
+            border-bottom-right-radius: 5px;
+        }
+
+        .message.received {
+            align-self: flex-start;
+            background-color: white;
+            color: var(--dark-color);
+            border-bottom-left-radius: 5px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .message-time {
+            font-size: 0.7rem;
+            opacity: 0.7;
+            margin-top: 5px;
+            text-align: right;
+        }
+
+        .chat-input {
+            display: flex;
+            padding: 15px;
+            border-top: 1px solid #eee;
+            background-color: white;
+        }
+
+        .chat-input input {
+            flex: 1;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 30px;
+            margin-right: 10px;
+            font-size: 0.95rem;
+            outline: none;
+            transition: var(--transition);
+        }
+
+        .chat-input input:focus {
+            border-color: var(--primary-color);
+        }
+
+        .chat-send {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 45px;
+            height: 45px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+            flex-shrink: 0;
+        }
+
+        .chat-send:hover {
+            background-color: var(--primary-dark);
+            transform: scale(1.05);
+        }
+
+        /* Notifications */
+        .notification-badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background-color: var(--danger-color);
+            color: white;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            font-size: 0.7rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #1a1a1a;
+            color: white;
+            padding: 60px 0 20px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-column h3 {
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-column h3:after {
+            content: '';
+            position: absolute;
+            width: 40px;
+            height: 2px;
+            background-color: var(--primary-color);
+            bottom: 0;
+            left: 0;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 12px;
+        }
+
+        .footer-column a {
+            color: #aaa;
+            text-decoration: none;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .footer-column a:hover {
+            color: white;
+            padding-left: 5px;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .footer-logo-icon {
+            font-size: 2rem;
+            color: var(--primary-color);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            background-color: #333;
+            border-radius: 50%;
+            color: white;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .social-link:hover {
+            background-color: var(--primary-color);
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #333;
+            color: #777;
+            font-size: 0.9rem;
+        }
+
+        /* Utility Classes */
+        .hidden {
+            display: none !important;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .text-primary {
+            color: var(--primary-color);
+        }
+
+        .text-secondary {
+            color: var(--secondary-color);
+        }
+
+        .text-accent {
+            color: var(--accent-color);
+        }
+
+        .text-gray {
+            color: var(--gray-color);
+        }
+
+        .mb-10 {
+            margin-bottom: 10px;
+        }
+
+        .mb-20 {
+            margin-bottom: 20px;
+        }
+
+        .mb-30 {
+            margin-bottom: 30px;
+        }
+
+        .mt-10 {
+            margin-top: 10px;
+        }
+
+        .mt-20 {
+            margin-top: 20px;
+        }
+
+        .mt-30 {
+            margin-top: 30px;
+        }
+
+        .p-20 {
+            padding: 20px;
+        }
+
+        .d-flex {
+            display: flex;
+        }
+
+        .align-center {
+            align-items: center;
+        }
+
+        .justify-between {
+            justify-content: space-between;
+        }
+
+        .gap-10 {
+            gap: 10px;
+        }
+
+        .gap-20 {
+            gap: 20px;
+        }
+
+        .flex-wrap {
+            flex-wrap: wrap;
+        }
+
+        /* Loading Spinner */
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid rgba(76, 175, 80, 0.2);
+            border-top: 4px solid var(--primary-color);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Toast Notifications */
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: var(--dark-color);
+            color: white;
+            padding: 15px 25px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-hover);
+            z-index: 3000;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            max-width: 500px;
+            animation: slideInUp 0.3s ease;
+        }
+
+        .toast-success {
+            background-color: var(--success-color);
+        }
+
+        .toast-error {
+            background-color: var(--danger-color);
+        }
+
+        .toast-info {
+            background-color: var(--secondary-color);
+        }
+
+        .toast-close {
+            cursor: pointer;
+            font-size: 1.2rem;
+            opacity: 0.8;
+        }
+
+        .toast-close:hover {
+            opacity: 1;
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .hero h2 {
+                font-size: 2.5rem;
+            }
+            
+            .about-content, .krasnodar-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .krasnodar-map {
+                height: 350px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-wrap: wrap;
+            }
+            
+            nav {
+                order: 3;
+                width: 100%;
+                margin-top: 15px;
+                display: none;
+            }
+            
+            nav.active {
+                display: block;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                gap: 0;
+                background-color: white;
+                border-radius: var(--border-radius);
+                padding: 10px 0;
+                box-shadow: var(--shadow);
+            }
+            
+            nav a {
+                display: block;
+                padding: 12px 20px;
+            }
+            
+            nav a:after {
+                display: none;
+            }
+            
+            .mobile-toggle {
+                display: block;
+            }
+            
+            .hero h2 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .hero-search {
+                flex-direction: column;
+                background-color: transparent;
+                box-shadow: none;
+                gap: 10px;
+            }
+            
+            .hero-search input, .hero-search button {
+                border-radius: var(--border-radius);
+            }
+            
+            .stats-bar {
+                flex-direction: column;
+                gap: 25px;
+            }
+            
+            .events-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .chat-container {
+                width: 300px;
+                height: 450px;
+                right: 10px;
+                bottom: 10px;
+            }
+            
+            .gallery-container {
+                height: 400px;
+            }
+            
+            .carousel-item {
+                width: 250px;
+                height: 350px;
+                margin-left: -125px;
+                margin-top: -175px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero {
+                padding: 60px 0;
+            }
+            
+            .section-title h2 {
+                font-size: 1.8rem;
+            }
+            
+            .features, .gallery-3d, .events, .organizations, .blog, .about, .krasnodar-region {
+                padding: 60px 0;
+            }
+            
+            .features-grid, .events-grid, .org-grid, .blog-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .about-stats {
+                grid-template-columns: 1fr;
+            }
+            
+            .modal-content {
+                width: 95%;
+                padding: 15px;
+            }
+            
+            .modal-header, .modal-body, .modal-footer {
+                padding: 20px 15px;
+            }
+            
+            .chat-container {
+                width: 100%;
+                height: 100%;
+                right: 0;
+                bottom: 0;
+                border-radius: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="#" class="logo" id="home-link">
+                    <div class="logo-icon">
+                        <i class="fas fa-hands-helping"></i>
+                    </div>
+                    <div class="logo-text">
+                        <h1>Добро вместе</h1>
+                        <p>Платформа для волонтеров</p>
+                    </div>
+                </a>
+                
+                <div class="mobile-toggle" id="mobile-toggle">
+                    <i class="fas fa-bars"></i>
+                </div>
+                
+                <nav id="main-nav">
+                    <ul>
+                        <li><a href="#" class="nav-link active" data-section="home">Главная</a></li>
+                        <li><a href="#" class="nav-link" data-section="events">Мероприятия</a></li>
+                        <li><a href="#" class="nav-link" data-section="organizations">Организации</a></li>
+                        <li><a href="#" class="nav-link" data-section="krasnodar">Краснодарский край</a></li>
+                        <li><a href="#" class="nav-link" data-section="blog">Блог</a></li>
+                        <li><a href="#" class="nav-link" data-section="about">О нас</a></li>
+                    </ul>
+                </nav>
+                
+                <div class="header-actions">
+                    <div class="user-menu">
+                        <div class="user-toggle" id="user-toggle">
+                            <div class="user-avatar" id="user-avatar">В</div>
+                            <span id="user-name">Волонтер</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="user-dropdown">
+                            <a href="#"><i class="fas fa-user-circle"></i> Мой профиль</a>
+                            <a href="#"><i class="fas fa-calendar-alt"></i> Мои мероприятия</a>
+                            <a href="#"><i class="fas fa-star"></i> Мои достижения</a>
+                            <div class="divider"></div>
+                            <a href="#" id="notifications-link"><i class="fas fa-bell"></i> Уведомления <span class="notification-badge" id="notification-count">3</span></a>
+                            <a href="#" id="settings-link"><i class="fas fa-cog"></i> Настройки</a>
+                            <div class="divider"></div>
+                            <a href="#" id="logout-btn"><i class="fas fa-sign-out-alt"></i> Выйти</a>
+                        </div>
+                    </div>
+                    <button class="btn btn-outline btn-sm" id="login-btn">Войти</button>
+                    <button class="btn btn-primary btn-sm" id="register-btn">Регистрация</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home-section">
+        <div class="container">
+            <div class="hero-content">
+                <h2>Объединяем добрые сердца для больших дел</h2>
+                <p>Платформа для координации волонтеров, поиска мероприятий и общения с единомышленниками по всей России</p>
+                <div class="hero-search">
+                    <input type="text" id="search-events" placeholder="Найти мероприятия по названию, городу или категории...">
+                    <button class="btn btn-accent btn-icon" id="search-btn">
+                        <i class="fas fa-search"></i> Найти
+                    </button>
+                </div>
+                <div class="stats-bar">
+                    <div class="stat-item">
+                        <div class="stat-number" id="stat-volunteers">50,000+</div>
+                        <div class="stat-label">Волонтеров</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number" id="stat-events">2,500+</div>
+                        <div class="stat-label">Мероприятий</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number" id="stat-cities">120+</div>
+                        <div class="stat-label">Городов</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number" id="stat-hours">500,000+</div>
+                        <div class="stat-label">Часов помощи</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Возможности платформы</h2>
+                <p>Все необходимое для эффективной волонтерской деятельности в одном месте</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-calendar-alt"></i>
+                    </div>
+                    <h3>Поиск мероприятий</h3>
+                    <p>Находите волонтерские события по интересам, дате и местоположению с удобной системой фильтрации</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>Координация команд</h3>
+                    <p>Создавайте группы, распределяйте задачи и отслеживайте прогресс в реальном времени</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-comments"></i>
+                    </div>
+                    <h3>Общение</h3>
+                    <p>Общайтесь с другими волонтерами, делитесь опытом и идеями в группах и личных чатах</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Статистика и отчеты</h3>
+                    <p>Отслеживайте свою активность и получайте признание за вклад с детальной статистикой</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-trophy"></i>
+                    </div>
+                    <h3>Система достижений</h3>
+                    <p>Получайте бейджи и награды за участие в различных мероприятиях и выполняйте миссии</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-bell"></i>
+                    </div>
+                    <h3>Уведомления</h3>
+                    <p>Будьте в курсе новых событий и важных обновлений через email, push и встроенные уведомления</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3D Gallery Section -->
+    <section class="gallery-3d" id="gallery-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Наши волонтеры в действии</h2>
+                <p>Посмотрите, как меняется мир благодаря вашей помощи</p>
+            </div>
+            <div class="gallery-container">
+                <div class="carousel" id="carousel">
+                    <!-- Carousel items will be generated by JavaScript -->
+                </div>
+            </div>
+            <div class="carousel-nav">
+                <button class="carousel-btn" id="carousel-prev">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <button class="carousel-btn" id="carousel-next">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+            <div class="carousel-dots" id="carousel-dots">
+                <!-- Dots will be generated by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Events Section -->
+    <section class="events" id="events-section">
+        <div class="container">
+            <div class="events-header">
+                <div class="section-title" style="text-align: left; margin-bottom: 0;">
+                    <h2 style="display: inline-block;">Ближайшие мероприятия</h2>
+                    <p style="text-align: left; margin: 5px 0 0 0;">Присоединяйтесь к волонтерским акциям в вашем городе или участвуйте онлайн</p>
+                </div>
+                <button class="btn btn-outline btn-icon" id="create-event-btn">
+                    <i class="fas fa-plus"></i> Создать мероприятие
+                </button>
+            </div>
+            
+            <div class="events-filter">
+                <button class="filter-btn active" data-filter="all">Все</button>
+                <button class="filter-btn" data-filter="ecology"><i class="fas fa-leaf"></i> Экология</button>
+                <button class="filter-btn" data-filter="animals"><i class="fas fa-paw"></i> Животные</button>
+                <button class="filter-btn" data-filter="children"><i class="fas fa-child"></i> Детям</button>
+                <button class="filter-btn" data-filter="elderly"><i class="fas fa-user-friends"></i> Пожилым</button>
+                <button class="filter-btn" data-filter="education"><i class="fas fa-graduation-cap"></i> Образование</button>
+                <button class="filter-btn" data-filter="online"><i class="fas fa-laptop"></i> Онлайн</button>
+                <button class="filter-btn" data-filter="krasnodar"><i class="fas fa-map-marker-alt"></i> Краснодарский край</button>
+            </div>
+            
+            <div class="events-grid" id="events-container">
+                <!-- Events will be loaded here by JavaScript -->
+            </div>
+            
+            <div class="text-center mt-30">
+                <button class="btn btn-outline" id="load-more-events">
+                    <i class="fas fa-redo"></i> Показать еще мероприятия
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Organizations Section -->
+    <section class="organizations" id="organizations-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Наши партнеры</h2>
+                <p>Организации, с которыми мы сотрудничаем для создания положительных изменений</p>
+            </div>
+            <div class="org-grid" id="organizations-container">
+                <!-- Organizations will be loaded here by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Krasnodar Region Section -->
+    <section class="krasnodar-region" id="krasnodar-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Волонтерство в Краснодарском крае</h2>
+                <p>Присоединяйтесь к мероприятиям в одном из самых солнечных регионов России</p>
+            </div>
+            <div class="krasnodar-content">
+                <div class="krasnodar-text">
+                    <h3>Активности в городах Краснодарского края</h3>
+                    <p>Краснодарский край - один из самых активных регионов в плане волонтерства. Здесь регулярно проходят экологические акции, мероприятия по помощи животным и социальные проекты.</p>
+                    <p>Присоединяйтесь к нашим мероприятиям в Краснодаре, Сочи, Новороссийске, Армавире, Ейске и других городах края.</p>
+                    <div class="about-stats">
+                        <div class="about-stat">
+                            <div class="stat-value">5,000+</div>
+                            <div class="stat-label">Волонтеров в крае</div>
+                        </div>
+                        <div class="about-stat">
+                            <div class="stat-value">150+</div>
+                            <div class="stat-label">Мероприятий в год</div>
+                        </div>
+                        <div class="about-stat">
+                            <div class="stat-value">25</div>
+                            <div class="stat-label">Городов</div>
+                        </div>
+                        <div class="about-stat">
+                            <div class="stat-value">30+</div>
+                            <div class="stat-label">Организаций</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="krasnodar-map">
+                    <div class="map-container">
+                        <div class="city-marker krasnodar" data-city="krasnodar">
+                            <div class="city-info">
+                                <h4>Краснодар</h4>
+                                <p>Столица края, более 50 мероприятий в год</p>
+                                <div class="city-events">15 активных мероприятий</div>
+                            </div>
+                        </div>
+                        <div class="city-marker sochi" data-city="sochi">
+                            <div class="city-info">
+                                <h4>Сочи</h4>
+                                <p>Курортный город, экологические акции</p>
+                                <div class="city-events">12 активных мероприятий</div>
+                            </div>
+                        </div>
+                        <div class="city-marker novorossiysk" data-city="novorossiysk">
+                            <div class="city-info">
+                                <h4>Новороссийск</h4>
+                                <p>Портовый город, помощь морским животным</p>
+                                <div class="city-events">8 активных мероприятий</div>
+                            </div>
+                        </div>
+                        <div class="city-marker armavir" data-city="armavir">
+                            <div class="city-info">
+                                <h4>Армавир</h4>
+                                <p>Социальные проекты, помощь детям</p>
+                                <div class="city-events">6 активных мероприятий</div>
+                            </div>
+                        </div>
+                        <div class="city-marker yeysk" data-city="yeysk">
+                            <div class="city-info">
+                                <h4>Ейск</h4>
+                                <p>Курортный город, пляжные уборки</p>
+                                <div class="city-events">5 активных мероприятий</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog Section -->
+    <section class="blog" id="blog-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Блог волонтера</h2>
+                <p>Истории, советы и новости из мира волонтерства</p>
+            </div>
+            <div class="blog-grid" id="blog-container">
+                <!-- Blog posts will be loaded here by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about-section">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-text">
+                    <h2>О платформе "Добро вместе"</h2>
+                    <p>"Добро вместе" - это инновационная платформа, созданная для объединения волонтеров со всей России. Мы верим, что каждый может внести свой вклад в улучшение мира, и наша миссия - сделать волонтерство доступным, удобным и эффективным.</p>
+                    <p>Наша платформа объединяет более 50 000 волонтеров из 120 городов России. Мы сотрудничаем с ведущими благотворительными организациями и предоставляем возможность участвовать как в локальных, так и в онлайн-мероприятиях.</p>
+                    <div class="about-stats">
+                        <div class="about-stat">
+                            <div class="stat-value">50,000+</div>
+                            <div class="stat-label">Волонтеров</div>
+                        </div>
+                        <div class="about-stat">
+                            <div class="stat-value">120</div>
+                            <div class="stat-label">Городов</div>
+                        </div>
+                        <div class="about-stat">
+                            <div class="stat-value">2,500+</div>
+                            <div class="stat-label">Мероприятий</div>
+                        </div>
+                        <div class="about-stat">
+                            <div class="stat-value">150+</div>
+                            <div class="stat-label">Организаций</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-image">
+                    <div style="width: 100%; height: 400px; background: linear-gradient(135deg, #4CAF50, #2196F3); display: flex; align-items: center; justify-content: center; color: white; font-size: 1.5rem; border-radius: var(--border-radius);">
+                        <div style="text-align: center; padding: 20px;">
+                            <i class="fas fa-hands-helping" style="font-size: 4rem; margin-bottom: 20px;"></i>
+                            <h3>Наша команда волонтеров</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <div class="footer-logo">
+                        <div class="footer-logo-icon">
+                            <i class="fas fa-hands-helping"></i>
+                        </div>
+                        <div>
+                            <h3>Добро вместе</h3>
+                            <p>Платформа для волонтеров</p>
+                        </div>
+                    </div>
+                    <p>Объединяем добрые сердца для больших дел. Делаем волонтерство доступным, удобным и эффективным для каждого.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-vk"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-telegram"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Разделы</h3>
+                    <ul>
+                        <li><a href="#" data-section="home"><i class="fas fa-home"></i> Главная</a></li>
+                        <li><a href="#" data-section="events"><i class="fas fa-calendar-alt"></i> Мероприятия</a></li>
+                        <li><a href="#" data-section="organizations"><i class="fas fa-building"></i> Организации</a></li>
+                        <li><a href="#" data-section="krasnodar"><i class="fas fa-map-marker-alt"></i> Краснодарский край</a></li>
+                        <li><a href="#" data-section="blog"><i class="fas fa-blog"></i> Блог</a></li>
+                        <li><a href="#" data-section="about"><i class="fas fa-info-circle"></i> О нас</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Помощь</h3>
+                    <ul>
+                        <li><a href="#"><i class="fas fa-question-circle"></i> Частые вопросы</a></li>
+                        <li><a href="#"><i class="fas fa-user-tie"></i> Для организаторов</a></li>
+                        <li><a href="#"><i class="fas fa-hands-helping"></i> Для волонтеров</a></li>
+                        <li><a href="#" id="contact-link"><i class="fas fa-envelope"></i> Связаться с нами</a></li>
+                        <li><a href="#"><i class="fas fa-file-contract"></i> Пользовательское соглашение</a></li>
+                        <li><a href="#"><i class="fas fa-shield-alt"></i> Политика конфиденциальности</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Контакты</h3>
+                    <ul>
+                        <li><a href="mailto:info@dobrovmeste.ru"><i class="fas fa-envelope"></i> info@dobrovmeste.ru</a></li>
+                        <li><a href="tel:+79991234567"><i class="fas fa-phone"></i> +7 (999) 123-45-67</a></li>
+                        <li><a href="#"><i class="fas fa-map-marker-alt"></i> Краснодар, ул. Добрых дел, 15</a></li>
+                    </ul>
+                    <div class="mt-20">
+                        <h4>Подписка на новости</h4>
+                        <div class="footer-subscribe">
+                            <input type="email" placeholder="Ваш email" style="width: 100%; padding: 10px; border-radius: 4px; border: 1px solid #333; margin: 10px 0; background: transparent; color: white;">
+                            <button class="btn btn-primary btn-sm btn-block">Подписаться</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2026 Добро вместе. Все права защищены.</p>
+                <p>Разработано с <i class="fas fa-heart" style="color: #ff4757;"></i> для волонтеров России</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modals -->
+    <div class="modal" id="login-modal">
+        <div class="modal-content">
+            <span class="close-modal" id="close-login">&times;</span>
+            <div class="modal-header">
+                <h2>Вход в аккаунт</h2>
+                <p class="text-gray">Войдите, чтобы получить доступ ко всем возможностям платформы</p>
+            </div>
+            <div class="modal-body">
+                <form id="login-form">
+                    <div class="form-group">
+                        <label for="login-email">Email или телефон</label>
+                        <input type="text" id="login-email" class="form-control" placeholder="example@mail.ru" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="login-password">Пароль</label>
+                        <input type="password" id="login-password" class="form-control" placeholder="Введите пароль" required>
+                        <div class="text-right mt-10">
+                            <a href="#" id="forgot-password" class="text-primary" style="font-size: 0.9rem;">Забыли пароль?</a>
+                        </div>
+                    </div>
+                    <div class="form-check">
+                        <input type="checkbox" id="remember-me">
+                        <label for="remember-me">Запомнить меня</label>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block btn-lg mt-20">
+                        <i class="fas fa-sign-in-alt"></i> Войти
+                    </button>
+                </form>
+                <div class="text-center mt-20">
+                    <p class="text-gray">Или войдите через</p>
+                    <div class="d-flex justify-center gap-20 mt-10">
+                        <button class="btn btn-outline" style="flex: 1;">
+                            <i class="fab fa-vk"></i> ВКонтакте
+                        </button>
+                        <button class="btn btn-outline" style="flex: 1;">
+                            <i class="fab fa-google"></i> Google
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <p class="text-gray" style="margin-right: auto;">Нет аккаунта? <a href="#" id="switch-to-register" class="text-primary">Зарегистрироваться</a></p>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="register-modal">
+        <div class="modal-content">
+            <span class="close-modal" id="close-register">&times;</span>
+            <div class="modal-header">
+                <h2>Регистрация</h2>
+                <p class="text-gray">Создайте аккаунт, чтобы присоединиться к нашему сообществу волонтеров</p>
+            </div>
+            <div class="modal-body">
+                <form id="register-form">
+                    <div class="form-group">
+                        <label for="register-name">Имя и фамилия</label>
+                        <input type="text" id="register-name" class="form-control" placeholder="Иван Иванов" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="register-email">Email</label>
+                        <input type="email" id="register-email" class="form-control" placeholder="example@mail.ru" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="register-phone">Телефон</label>
+                        <input type="tel" id="register-phone" class="form-control" placeholder="+7 (999) 999-99-99">
+                    </div>
+                    <div class="form-group">
+                        <label for="register-password">Пароль</label>
+                        <input type="password" id="register-password" class="form-control" placeholder="Не менее 8 символов" required>
+                        <div class="password-strength mt-10">
+                            <div class="progress-bar">
+                                <div class="progress-fill" id="password-strength-bar" style="width: 0%"></div>
+                            </div>
+                            <div class="progress-text">
+                                <span id="password-strength-text">Надежность пароля</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="register-confirm">Подтвердите пароль</label>
+                        <input type="password" id="register-confirm" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="register-city">Город</label>
+                        <select id="register-city" class="form-control form-select" required>
+                            <option value="">Выберите город</option>
+                            <option value="moscow">Москва</option>
+                            <option value="spb">Санкт-Петербург</option>
+                            <option value="ekb">Екатеринбург</option>
+                            <option value="novosibirsk">Новосибирск</option>
+                            <option value="kazan">Казань</option>
+                            <option value="krasnodar">Краснодар</option>
+                            <option value="sochi">Сочи</option>
+                            <option value="other">Другой город</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Интересы</label>
+                        <div class="interests-grid" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-top: 10px;">
+                            <div class="form-check">
+                                <input type="checkbox" id="interest-ecology" value="ecology">
+                                <label for="interest-ecology">Экология</label>
+                            </div>
+                            <div class="form-check">
+                                <input type="checkbox" id="interest-animals" value="animals">
+                                <label for="interest-animals">Животные</label>
+                            </div>
+                            <div class="form-check">
+                                <input type="checkbox" id="interest-children" value="children">
+                                <label for="interest-children">Детям</label>
+                            </div>
+                            <div class="form-check">
+                                <input type="checkbox" id="interest-elderly" value="elderly">
+                                <label for="interest-elderly">Пожилым</label>
+                            </div>
+                            <div class="form-check">
+                                <input type="checkbox" id="interest-education" value="education">
+                                <label for="interest-education">Образование</label>
+                            </div>
+                            <div class="form-check">
+                                <input type="checkbox" id="interest-online" value="online">
+                                <label for="interest-online">Онлайн-волонтерство</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-check">
+                        <input type="checkbox" id="register-agreement" required>
+                        <label for="register-agreement">Я согласен с <a href="#" class="text-primary">пользовательским соглашением</a> и <a href="#" class="text-primary">политикой конфиденциальности</a></label>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block btn-lg mt-20">
+                        <i class="fas fa-user-plus"></i> Зарегистрироваться
+                    </button>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <p class="text-gray" style="margin-right: auto;">Уже есть аккаунт? <a href="#" id="switch-to-login" class="text-primary">Войти</a></p>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="event-modal">
+        <div class="modal-content">
+            <span class="close-modal" id="close-event">&times;</span>
+            <div id="event-modal-content">
+                <!-- Event details will be loaded here by JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="create-event-modal">
+        <div class="modal-content">
+            <span class="close-modal" id="close-create-event">&times;</span>
+            <div class="modal-header">
+                <h2>Создание мероприятия</h2>
+                <p class="text-gray">Заполните информацию о новом волонтерском мероприятии</p>
+            </div>
+            <div class="modal-body">
+                <form id="create-event-form">
+                    <div class="form-group">
+                        <label for="event-title">Название мероприятия</label>
+                        <input type="text" id="event-title" class="form-control" placeholder="Например: Уборка парка" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="event-description">Описание</label>
+                        <textarea id="event-description" class="form-control" placeholder="Опишите детали мероприятия, что нужно делать, что взять с собой и т.д." rows="4" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="event-category">Категория</label>
+                        <select id="event-category" class="form-control form-select" required>
+                            <option value="">Выберите категорию</option>
+                            <option value="ecology">Экология</option>
+                            <option value="animals">Помощь животным</option>
+                            <option value="children">Детям</option>
+                            <option value="elderly">Пожилым</option>
+                            <option value="education">Образование</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="event-date">Дата и время</label>
+                        <input type="datetime-local" id="event-date" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="event-location">Место проведения</label>
+                        <input type="text" id="event-location" class="form-control" placeholder="Например: Центральный парк" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="event-city">Город</label>
+                        <input type="text" id="event-city" class="form-control" placeholder="Например: Москва" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="event-volunteers">Количество волонтеров</label>
+                        <input type="number" id="event-volunteers" class="form-control" min="1" value="10" required>
+                    </div>
+                    <div class="form-check">
+                        <input type="checkbox" id="event-online">
+                        <label for="event-online">Онлайн-мероприятие</label>
+                    </div>
+                    <div class="d-flex gap-20 mt-30">
+                        <button type="submit" class="btn btn-primary btn-block">
+                            <i class="fas fa-calendar-plus"></i> Создать мероприятие
+                        </button>
+                        <button type="button" class="btn btn-outline" id="cancel-create-event">
+                            Отмена
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Chat Widget -->
+    <div class="chat-container" id="chat-widget">
+        <div class="chat-header">
+            <h3><i class="fas fa-comments"></i> Чат волонтеров</h3>
+            <div class="chat-status">
+                <span class="status-dot"></span>
+                <span id="online-count">25 онлайн</span>
+            </div>
+            <span class="chat-close" id="close-chat">&times;</span>
+        </div>
+        <div class="chat-messages" id="chat-messages">
+            <div class="message received">
+                Привет! Добро пожаловать в чат волонтеров!
+                <div class="message-time">10:00</div>
+            </div>
+            <div class="message received">
+                Здесь вы можете общаться с другими участниками платформы, задавать вопросы и делиться опытом.
+                <div class="message-time">10:01</div>
+            </div>
+            <div class="message sent">
+                Привет! Я новичок, с чего лучше начать?
+                <div class="message-time">10:05</div>
+            </div>
+            <div class="message received">
+                Начните с поиска мероприятий по своим интересам. Рекомендую сначала выбрать онлайн-мероприятия, чтобы познакомиться с процессом.
+                <div class="message-time">10:06</div>
+            </div>
+        </div>
+        <div class="chat-input">
+            <input type="text" id="chat-input" placeholder="Введите сообщение...">
+            <button class="chat-send" id="send-message">
+                <i class="fas fa-paper-plane"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Chat Toggle Button -->
+    <button class="btn btn-accent" id="chat-toggle" style="position: fixed; bottom: 20px; right: 20px; border-radius: 50%; width: 60px; height: 60px; font-size: 1.5rem; z-index: 999; box-shadow: var(--shadow-hover); display: flex; align-items: center; justify-content: center;">
+        <i class="fas fa-comment"></i>
+        <span class="notification-badge" id="chat-notification" style="display: none;">1</span>
+    </button>
+
+    <!-- Toast Notification -->
+    <div class="toast hidden" id="toast">
+        <span id="toast-message"></span>
+        <span class="toast-close" id="toast-close">&times;</span>
+    </div>
+
+    <script>
+        // ========================
+        // INITIALIZATION
+        // ========================
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize the application
+            initApp();
+        });
+
+        // ========================
+        // DATA MODELS
+        // ========================
+        const UserModel = {
+            currentUser: null,
+            isAuthenticated: false,
+            
+            init() {
+                // Try to load user from localStorage
+                const savedUser = localStorage.getItem('dobro_user');
+                if (savedUser) {
+                    this.currentUser = JSON.parse(savedUser);
+                    this.isAuthenticated = true;
+                    updateUserUI();
+                }
+            },
+            
+            login(email, password) {
+                // In a real app, this would be an API call
+                return new Promise((resolve, reject) => {
+                    setTimeout(() => {
+                        // Simulate API response
+                        if (email && password.length >= 6) {
+                            this.currentUser = {
+                                id: 1,
+                                name: email.split('@')[0],
+                                fullName: 'Иван Иванов',
+                                email: email,
+                                city: 'Москва',
+                                avatar: 'В',
+                                joinedDate: '2024-01-15',
+                                hours: 42,
+                                events: 8,
+                                badges: 3,
+                                interests: ['ecology', 'animals']
+                            };
+                            this.isAuthenticated = true;
+                            localStorage.setItem('dobro_user', JSON.stringify(this.currentUser));
+                            resolve(this.currentUser);
+                        } else {
+                            reject(new Error('Неверный email или пароль'));
+                        }
+                    }, 500);
+                });
+            },
+            
+            register(userData) {
+                return new Promise((resolve, reject) => {
+                    setTimeout(() => {
+                        this.currentUser = {
+                            id: Date.now(),
+                            name: userData.name.split(' ')[0],
+                            fullName: userData.name,
+                            email: userData.email,
+                            city: userData.city,
+                            avatar: userData.name.charAt(0),
+                            joinedDate: new Date().toISOString().split('T')[0],
+                            hours: 0,
+                            events: 0,
+                            badges: 1,
+                            interests: userData.interests || []
+                        };
+                        this.isAuthenticated = true;
+                        localStorage.setItem('dobro_user', JSON.stringify(this.currentUser));
+                        resolve(this.currentUser);
+                    }, 500);
+                });
+            },
+            
+            logout() {
+                this.currentUser = null;
+                this.isAuthenticated = false;
+                localStorage.removeItem('dobro_user');
+            }
+        };
+
+        const EventModel = {
+            events: [
+                {
+                    id: 1,
+                    title: "Уборка парка",
+                    description: "Присоединяйтесь к уборке городского парка. Приносите с собой перчатки и хорошее настроение! Мы обеспечим инвентарь и мешки для мусора. После уборки - пикник на природе для всех участников!",
+                    date: "2026-04-15T10:00:00",
+                    time: "10:00",
+                    location: "Центральный парк",
+                    city: "Москва",
+                    category: "ecology",
+                    organizer: "ЭкоДвижение",
+                    organizerId: 1,
+                    volunteersNeeded: 20,
+                    volunteersRegistered: 15,
+                    online: false,
+                    image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80",
+                    status: "active"
+                },
+                {
+                    id: 2,
+                    title: "Помощь приюту для животных",
+                    description: "Нужна помощь в уходе за животными и уборке территории приюта. Мы будем кормить животных, выгуливать собак, чистить вольеры и помогать с мелкими ремонтными работами. Опыт не требуется - всему научим на месте!",
+                    date: "2026-04-20T09:00:00",
+                    time: "09:00",
+                    location: "Приют 'Добрые руки'",
+                    city: "Санкт-Петербург",
+                    category: "animals",
+                    organizer: "ЗооЗащита",
+                    organizerId: 2,
+                    volunteersNeeded: 15,
+                    volunteersRegistered: 10,
+                    online: false,
+                    image: "https://images.unsplash.com/photo-1560743641-3914f2c45636?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80",
+                    status: "active"
+                },
+                {
+                    id: 3,
+                    title: "Обучение компьютерной грамотности",
+                    description: "Помогите пожилым людям освоить базовые навыки работы с компьютером и интернетом. Научим создавать электронную почту, пользоваться мессенджерами для общения с родственниками, находить информацию в интернете и пользоваться госуслугами онлайн.",
+                    date: "2026-04-25T14:00:00",
+                    time: "14:00",
+                    location: "Библиотека №5",
+                    city: "Екатеринбург",
+                    category: "elderly",
+                    organizer: "Серебряный век",
+                    organizerId: 3,
+                    volunteersNeeded: 10,
+                    volunteersRegistered: 8,
+                    online: false,
+                    image: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80",
+                    status: "active"
+                },
+                {
+                    id: 4,
+                    title: "Онлайн-поддержка пожилых людей",
+                    description: "Удаленная помощь пожилым людям в освоении цифровых технологий. Помогите им настроить видеосвязь с родственниками, установить полезные приложения или разобраться с онлайн-оплатами. Волонтерство полностью онлайн - участвуйте из любого города!",
+                    date: "2026-05-12T10:00:00",
+                    time: "10:00",
+                    location: "Онлайн",
+                    city: "Любой",
+                    category: "elderly",
+                    organizer: "Цифровые помощники",
+                    organizerId: 6,
+                    volunteersNeeded: 20,
+                    volunteersRegistered: 12,
+                    online: true,
+                    image: "https://images.unsplash.com/photo-1581276879432-15e50529f34b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80",
+                    status: "active"
+                },
+                {
+                    id: 5,
+                    title: "Уборка пляжа в Сочи",
+                    description: "Присоединяйтесь к уборке пляжа в Сочи. Мы соберем мусор, оставленный отдыхающими, и приведем в порядок прибрежную зону. После уборки - купание в море для всех участников!",
+                    date: "2026-05-22T09:00:00",
+                    time: "09:00",
+                    location: "Пляж 'Маяк'",
+                    city: "Сочи",
+                    region: "krasnodar",
+                    category: "ecology",
+                    organizer: "Чистый берег",
+                    organizerId: 7,
+                    volunteersNeeded: 25,
+                    volunteersRegistered: 18,
+                    online: false,
+                    image: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80",
+                    status: "active"
+                },
+                {
+                    id: 6,
+                    title: "Фестиваль волонтеров в Краснодаре",
+                    description: "Большой фестиваль для волонтеров Краснодарского края. В программе: мастер-классы, лекции, знакомство с организациями и праздничный концерт. Приходите, чтобы найти новых друзей и единомышленников!",
+                    date: "2026-06-01T11:00:00",
+                    time: "11:00",
+                    location: "Парк 'Солнечный остров'",
+                    city: "Краснодар",
+                    region: "krasnodar",
+                    category: "education",
+                    organizer: "Добро вместе",
+                    organizerId: 0,
+                    volunteersNeeded: 100,
+                    volunteersRegistered: 75,
+                    online: false,
+                    image: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80",
+                    status: "active"
+                }
+            ],
+            
+            getFilteredEvents(filter = 'all') {
+                let filtered = [...this.events];
+                
+                if (filter === 'online') {
+                    filtered = filtered.filter(event => event.online);
+                } else if (filter === 'krasnodar') {
+                    filtered = filtered.filter(event => event.region === 'krasnodar');
+                } else if (filter !== 'all') {
+                    filtered = filtered.filter(event => event.category === filter);
+                }
+                
+                return filtered;
+            },
+            
+            joinEvent(eventId, userId) {
+                const event = this.events.find(e => e.id === eventId);
+                if (event && event.volunteersRegistered < event.volunteersNeeded) {
+                    event.volunteersRegistered++;
+                    return true;
+                }
+                return false;
+            },
+            
+            createEvent(eventData) {
+                const newEvent = {
+                    id: this.events.length + 1,
+                    ...eventData,
+                    volunteersRegistered: 0,
+                    status: 'active',
+                    organizer: UserModel.currentUser?.fullName || 'Вы',
+                    organizerId: UserModel.currentUser?.id || 0
+                };
+                this.events.unshift(newEvent);
+                return newEvent;
+            }
+        };
+
+        const OrganizationModel = {
+            organizations: [
+                {
+                    id: 1,
+                    name: "ЭкоДвижение",
+                    description: "Некоммерческая организация, занимающаяся защитой окружающей среды и экологическим просвещением. Организуем уборки, посадки деревьев и образовательные мероприятия.",
+                    city: "Москва",
+                    volunteers: 1200,
+                    events: 45,
+                    rating: 4.8,
+                    categories: ["ecology", "education"],
+                    contact: "info@ecodvizhenie.ru",
+                    website: "https://ecodvizhenie.ru"
+                },
+                {
+                    id: 2,
+                    name: "ЗооЗащита",
+                    description: "Общественная организация, помогающая бездомным животным и продвигающая гуманное отношение к животным. Работаем с приютами, организуем акции по стерилизации.",
+                    city: "Санкт-Петербург",
+                    volunteers: 850,
+                    events: 32,
+                    rating: 4.9,
+                    categories: ["animals"],
+                    contact: "help@zoozashita.ru",
+                    website: "https://zoozashita.ru"
+                },
+                {
+                    id: 3,
+                    name: "Серебряный век",
+                    description: "Проект поддержки пожилых людей, помогающий им адаптироваться к современным технологиям и оставаться активными. Проводим курсы, встречи и консультации.",
+                    city: "Екатеринбург",
+                    volunteers: 600,
+                    events: 28,
+                    rating: 4.7,
+                    categories: ["elderly", "education"],
+                    contact: "contact@serebro-vek.ru",
+                    website: "https://serebro-vek.ru"
+                },
+                {
+                    id: 4,
+                    name: "Дети нашего города",
+                    description: "Благотворительный фонд, оказывающий помощь детям из малообеспеченных семей и детских домов. Организуем праздники, сборы вещей и образовательные программы.",
+                    city: "Новосибирск",
+                    volunteers: 1100,
+                    events: 51,
+                    rating: 4.8,
+                    categories: ["children"],
+                    contact: "info@deti-nashego-goroda.ru",
+                    website: "https://deti-nashego-goroda.ru"
+                },
+                {
+                    id: 5,
+                    name: "Чистый берег",
+                    description: "Экологическая организация, занимающаяся очисткой прибрежных зон Черного моря. Регулярные уборки пляжей, просветительская работа с туристами.",
+                    city: "Сочи",
+                    volunteers: 300,
+                    events: 15,
+                    rating: 4.7,
+                    categories: ["ecology"],
+                    region: "krasnodar",
+                    contact: "clean@chistiy-bereg.ru",
+                    website: "https://chistiy-bereg.ru"
+                },
+                {
+                    id: 6,
+                    name: "Цифровые помощники",
+                    description: "Волонтерское движение, помогающее пожилым людям освоить цифровые технологии в онлайн-формате. Удаленная поддержка, видеоконсультации, обучение.",
+                    city: "Онлайн",
+                    volunteers: 950,
+                    events: 40,
+                    rating: 4.9,
+                    categories: ["elderly", "online"],
+                    contact: "help@digital-helpers.ru",
+                    website: "https://digital-helpers.ru"
+                }
+            ]
+        };
+
+        const BlogModel = {
+            posts: [
+                {
+                    id: 1,
+                    title: "Как начать волонтерствовать: руководство для новичков",
+                    excerpt: "Первые шаги в волонтерстве могут быть пугающими. В этой статье мы расскажем, с чего начать и как найти подходящее мероприятие.",
+                    content: "<p>Волонтерство - это прекрасная возможность сделать мир лучше и познакомиться с единомышленниками. Но многие не знают, с чего начать. В этой статье мы подготовили пошаговое руководство для тех, кто только задумывается о волонтерской деятельности.</p><p><strong>Шаг 1: Определите свои интересы</strong></p><p>Подумайте, что вам действительно интересно: помощь животным, экология, работа с детьми или пожилыми людьми? Выберите то, что вызывает у вас эмоциональный отклик.</p><p><strong>Шаг 2: Оцените свои возможности</strong></p><p>Сколько времени вы готовы уделять? Можете ли вы участвовать в оффлайн-мероприятиях или предпочитаете онлайн-формат? Будьте реалистичны в своих ожиданиях.</p><p><strong>Шаг 3: Найдите подходящие мероприятия</strong></p><p>Используйте нашу платформу для поиска мероприятий по категориям, датам и местоположению. Начните с небольших мероприятий, чтобы понять формат.</p><p><strong>Шаг 4: Зарегистрируйтесь и приходите</strong></p><p>Не бойтесь сделать первый шаг! Организаторы всегда рады новым волонтерам и помогут вам освоиться.</p><p>Помните: даже небольшая помощь имеет значение. Каждый час, который вы посвящаете волонтерству, делает мир чуточку лучше.</p>",
+                    date: "2026-03-10",
+                    author: "Анна Иванова",
+                    authorRole: "Координатор волонтеров",
+                    category: "советы",
+                    image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80",
+                    views: 1245,
+                    likes: 89
+                },
+                {
+                    id: 2,
+                    title: "История успеха: как онлайн-волонтерство меняет жизни",
+                    excerpt: "Рассказ о том, как удаленная волонтерская помощь принесла реальные результаты в разных уголках страны.",
+                    content: "<p>В современном цифровом мире волонтерство вышло за рамки физического присутствия. Онлайн-волонтерство позволяет помогать, не выходя из дома.</p><p><strong>История Марии: помощь через экран</strong></p><p>Мария из Новосибирска помогает пожилым людям осваивать цифровые технологии. Через Zoom она учит своих подопечных пользоваться мессенджерами, онлайн-банками и госуслугами.</p><p>'Я помогаю бабушке из Краснодара общаться с внуками в Москве через видео звонки. Видеть ее счастливые глаза - лучшая награда', - делится Мария.</p><p><strong>История Алексея: IT-волонтер</strong></p><p>Алексей - программист из Екатеринбурга. В свободное время он помогает благотворительным организациям создавать и поддерживать сайты.</p><p>'Мои навыки помогают организациям экономить на разработке и больше средств направлять на помощь нуждающимся', - говорит Алексей.</p><p>Онлайн-волонтерство открывает новые возможности для тех, кто не может участвовать в оффлайн-мероприятиях, но хочет быть полезным.</p>",
+                    date: "2026-03-05",
+                    author: "Петр Сидоров",
+                    authorRole: "Основатель 'Цифровых помощников'",
+                    category: "истории",
+                    image: "https://images.unsplash.com/photo-1581276879432-15e50529f34b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80",
+                    views: 987,
+                    likes: 67
+                },
+                {
+                    id: 3,
+                    title: "Топ-5 причин стать волонтером в 2026 году",
+                    excerpt: "Почему волонтерство становится все популярнее и что оно дает помимо морального удовлетворения.",
+                    content: "<p>Волонтерство - это не только помощь другим, но и множество преимуществ для самого волонтера. Вот 5 основных причин, почему стоит начать волонтерскую деятельность в 2026 году:</p><p><strong>1. Новые навыки и опыт</strong></p><p>Волонтерство - отличная возможность развить soft skills: коммуникацию, работу в команде, лидерство. Многие организации также предлагают обучение специфическим навыкам.</p><p><strong>2. Расширение круга общения</strong></p><p>Вы познакомитесь с людьми, которые разделяют ваши ценности. Многие волонтеры находят в сообществе настоящих друзей и полезные деловые контакты.</p><p><strong>3. Улучшение ментального здоровья</strong></p><p>Исследования показывают, что помощь другим снижает уровень стресса, повышает самооценку и дает чувство цели в жизни.</p><p><strong>4. Карьерные перспективы</strong></p><p>Волонтерский опыт ценится работодателями. Он показывает вашу социальную ответственность, инициативность и разнообразные навыки.</p><p><strong>5. Личностный рост</strong></p><p>Волонтерство помогает выйти из зоны комфорта, научиться решать нестандартные задачи и увидеть мир с новой перспективы.</p><p>Начните свой волонтерский путь уже сегодня - регистрируйтесь на нашей платформе и найдите свое первое мероприятие!</p>",
+                    date: "2026-02-28",
+                    author: "Мария Петрова",
+                    authorRole: "Психолог, волонтер с 10-летним стажем",
+                    category: "мотивация",
+                    image: "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80",
+                    views: 1567,
+                    likes: 112
+                }
+            ]
+        };
+
+        // ========================
+        // VIEW COMPONENTS
+        // ========================
+        const EventView = {
+            renderEvents(events, containerId) {
+                const container = document.getElementById(containerId);
+                if (!container) return;
+                
+                if (events.length === 0) {
+                    container.innerHTML = `
+                        <div style="grid-column: 1 / -1; text-align: center; padding: 40px;">
+                            <i class="fas fa-calendar-times" style="font-size: 3rem; color: #ddd; margin-bottom: 20px;"></i>
+                            <h3 style="color: var(--gray-color); margin-bottom: 10px;">Мероприятий не найдено</h3>
+                            <p style="color: #aaa;">Попробуйте изменить параметры фильтрации</p>
+                        </div>
+                    `;
+                    return;
+                }
+                
+                container.innerHTML = events.map(event => {
+                    const date = new Date(event.date);
+                    const formattedDate = date.toLocaleDateString('ru-RU', {
+                        day: 'numeric',
+                        month: 'long',
+                        year: 'numeric'
+                    });
+                    const formattedTime = date.toLocaleTimeString('ru-RU', {
+                        hour: '2-digit',
+                        minute: '2-digit'
+                    });
+                    
+                    const progress = (event.volunteersRegistered / event.volunteersNeeded) * 100;
+                    const badgeType = event.online ? 'badge-online' : (event.region === 'krasnodar' ? 'badge-krasnodar' : 'badge-offline');
+                    const badgeText = event.online ? 'ОНЛАЙН' : (event.region === 'krasnodar' ? 'КРАСНОДАРСКИЙ КРАЙ' : 'ОФФЛАЙН');
+                    
+                    return `
+                        <div class="event-card" data-id="${event.id}" data-category="${event.category}">
+                            <div class="event-image" style="background-image: url('${event.image}');">
+                                <span class="event-badge ${badgeType}">${badgeText}</span>
+                            </div>
+                            <div class="event-content">
+                                <span class="event-date">${formattedDate} • ${formattedTime}</span>
+                                <h3>${event.title}</h3>
+                                <p>${event.description.substring(0, 120)}...</p>
+                                <div class="event-meta">
+                                    <span><i class="fas fa-map-marker-alt"></i> ${event.location} ${event.online ? '' : `(${event.city})`}</span>
+                                    <span><i class="fas fa-user-friends"></i> ${event.volunteersRegistered}/${event.volunteersNeeded}</span>
+                                </div>
+                                <div class="event-progress">
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: ${progress}%"></div>
+                                    </div>
+                                    <div class="progress-text">
+                                        <span>Набрано волонтеров</span>
+                                        <span>${event.volunteersRegistered} из ${event.volunteersNeeded}</span>
+                                    </div>
+                                </div>
+                                <div class="d-flex gap-10">
+                                    <button class="btn btn-primary btn-sm btn-block view-event" data-id="${event.id}">
+                                        <i class="fas fa-info-circle"></i> Подробнее
+                                    </button>
+                                    <button class="btn btn-outline btn-sm join-event" data-id="${event.id}" ${event.volunteersRegistered >= event.volunteersNeeded ? 'disabled' : ''}>
+                                        <i class="fas fa-user-plus"></i> Участвовать
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+                
+                // Add event listeners
+                document.querySelectorAll('.view-event').forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        const eventId = parseInt(this.getAttribute('data-id'));
+                        EventController.showEventDetails(eventId);
+                    });
+                });
+                
+                document.querySelectorAll('.join-event').forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        const eventId = parseInt(this.getAttribute('data-id'));
+                        EventController.joinEvent(eventId);
+                    });
+                });
+            },
+            
+            renderEventDetails(event) {
+                const date = new Date(event.date);
+                const formattedDate = date.toLocaleDateString('ru-RU', {
+                    weekday: 'long',
+                    day: 'numeric',
+                    month: 'long',
+                    year: 'numeric'
+                });
+                const formattedTime = date.toLocaleTimeString('ru-RU', {
+                    hour: '2-digit',
+                    minute: '2-digit'
+                });
+                
+                const progress = (event.volunteersRegistered / event.volunteersNeeded) * 100;
+                const spotsLeft = event.volunteersNeeded - event.volunteersRegistered;
+                
+                return `
+                    <div class="modal-header">
+                        <h2>${event.title}</h2>
+                        <p class="text-gray"><i class="fas fa-calendar-alt"></i> ${formattedDate} в ${formattedTime}</p>
+                    </div>
+                    <div class="modal-body">
+                        <div style="margin-bottom: 25px;">
+                            <span class="event-badge ${event.online ? 'badge-online' : (event.region === 'krasnodar' ? 'badge-krasnodar' : 'badge-offline')}" style="position: static; display: inline-block;">
+                                ${event.online ? 'ОНЛАЙН' : (event.region === 'krasnodar' ? 'КРАСНОДАРСКИЙ КРАЙ' : 'ОФФЛАЙН')}
+                            </span>
+                            <span class="event-badge" style="background-color: rgba(76, 175, 80, 0.1); color: var(--primary-color); position: static; display: inline-block; margin-left: 10px;">
+                                <i class="fas fa-users"></i> ${event.category === 'ecology' ? 'Экология' : 
+                                    event.category === 'animals' ? 'Животные' : 
+                                    event.category === 'children' ? 'Детям' : 
+                                    event.category === 'elderly' ? 'Пожилым' : 
+                                    event.category === 'education' ? 'Образование' : 'Другое'}
+                            </span>
+                        </div>
+                        
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 25px;">
+                            <div>
+                                <h4><i class="fas fa-map-marker-alt"></i> Место проведения</h4>
+                                <p>${event.location} ${event.online ? '' : `(${event.city})`}</p>
+                            </div>
+                            <div>
+                                <h4><i class="fas fa-user-tie"></i> Организатор</h4>
+                                <p>${event.organizer}</p>
+                            </div>
+                        </div>
+                        
+                        <div style="margin-bottom: 25px;">
+                            <h4>Описание мероприятия</h4>
+                            <p>${event.description}</p>
+                        </div>
+                        
+                        <div style="margin-bottom: 30px;">
+                            <h4>Статус набора волонтеров</h4>
+                            <div class="event-progress">
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: ${progress}%"></div>
+                                </div>
+                                <div class="progress-text">
+                                    <span>${spotsLeft > 0 ? `Осталось ${spotsLeft} мест` : 'Набор завершен'}</span>
+                                    <span>${event.volunteersRegistered} из ${event.volunteersNeeded}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        ${spotsLeft > 0 ? 
+                            `<button class="btn btn-primary" id="join-event-btn" data-id="${event.id}">
+                                <i class="fas fa-user-plus"></i> Принять участие
+                            </button>` : 
+                            `<button class="btn btn-outline" disabled>
+                                <i class="fas fa-user-check"></i> Набор завершен
+                            </button>`
+                        }
+                        <button class="btn btn-outline" id="share-event-btn" data-id="${event.id}">
+                            <i class="fas fa-share-alt"></i> Поделиться
+                        </button>
+                    </div>
+                `;
+            }
+        };
+
+        const OrganizationView = {
+            renderOrganizations(orgs, containerId) {
+                const container = document.getElementById(containerId);
+                if (!container) return;
+                
+                container.innerHTML = orgs.map(org => {
+                    const ratingStars = '★'.repeat(Math.floor(org.rating)) + '☆'.repeat(5 - Math.floor(org.rating));
+                    
+                    return `
+                        <div class="org-card" data-id="${org.id}">
+                            <div class="org-logo">${org.name.charAt(0)}</div>
+                            <h3>${org.name}</h3>
+                            <div class="org-rating" title="Рейтинг: ${org.rating}/5">
+                                ${ratingStars} <span style="color: var(--gray-color); font-size: 0.9rem;">${org.rating}</span>
+                            </div>
+                            <p>${org.description}</p>
+                            <div class="org-stats">
+                                <div class="stat">
+                                    <div class="stat-value">${org.volunteers}</div>
+                                    <div class="stat-label">Волонтеров</div>
+                                </div>
+                                <div class="stat">
+                                    <div class="stat-value">${org.events}</div>
+                                    <div class="stat-label">Мероприятий</div>
+                                </div>
+                                <div class="stat">
+                                    <div class="stat-value">${org.city}</div>
+                                    <div class="stat-label">Город</div>
+                                </div>
+                            </div>
+                            <button class="btn btn-outline view-org mt-20" data-id="${org.id}" style="width: 100%;">
+                                <i class="fas fa-info-circle"></i> Подробнее
+                            </button>
+                        </div>
+                    `;
+                }).join('');
+                
+                // Add event listeners
+                document.querySelectorAll('.view-org').forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        const orgId = parseInt(this.getAttribute('data-id'));
+                        OrganizationController.showOrganizationDetails(orgId);
+                    });
+                });
+            },
+            
+            renderOrganizationDetails(org) {
+                const ratingStars = '★'.repeat(Math.floor(org.rating)) + '☆'.repeat(5 - Math.floor(org.rating));
+                const orgEvents = EventModel.events.filter(e => e.organizerId === org.id);
+                
+                return `
+                    <div class="modal-header">
+                        <h2>${org.name}</h2>
+                        <p class="text-gray"><i class="fas fa-map-marker-alt"></i> ${org.city}</p>
+                    </div>
+                    <div class="modal-body">
+                        <div style="margin-bottom: 25px;">
+                            <div style="display: inline-block; background-color: rgba(76, 175, 80, 0.1); color: var(--primary-color); padding: 8px 15px; border-radius: var(--border-radius); font-weight: 600;">
+                                Рейтинг: ${ratingStars} ${org.rating}/5
+                            </div>
+                        </div>
+                        
+                        <div style="margin-bottom: 25px;">
+                            <h4>О организации</h4>
+                            <p>${org.description}</p>
+                        </div>
+                        
+                        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin-bottom: 25px;">
+                            <div style="text-align: center; padding: 15px; background-color: var(--light-color); border-radius: var(--border-radius);">
+                                <div style="font-size: 1.8rem; font-weight: bold; color: var(--primary-color);">${org.volunteers}</div>
+                                <div style="font-size: 0.9rem; color: var(--gray-color);">Волонтеров</div>
+                            </div>
+                            <div style="text-align: center; padding: 15px; background-color: var(--light-color); border-radius: var(--border-radius);">
+                                <div style="font-size: 1.8rem; font-weight: bold; color: var(--primary-color);">${org.events}</div>
+                                <div style="font-size: 0.9rem; color: var(--gray-color);">Мероприятий</div>
+                            </div>
+                            <div style="text-align: center; padding: 15px; background-color: var(--light-color); border-radius: var(--border-radius);">
+                                <div style="font-size: 1.8rem; font-weight: bold; color: var(--primary-color);">${org.rating}</div>
+                                <div style="font-size: 0.9rem; color: var(--gray-color);">Рейтинг</div>
+                            </div>
+                        </div>
+                        
+                        ${orgEvents.length > 0 ? `
+                            <div style="margin-bottom: 25px;">
+                                <h4>Активные мероприятия</h4>
+                                <ul style="margin-top: 10px; padding-left: 20px;">
+                                    ${orgEvents.slice(0, 3).map(event => `
+                                        <li style="margin-bottom: 8px;">
+                                            <a href="#" class="text-primary view-event-from-org" data-id="${event.id}" style="text-decoration: none;">
+                                                ${event.title} (${new Date(event.date).toLocaleDateString('ru-RU')})
+                                            </a>
+                                        </li>
+                                    `).join('')}
+                                </ul>
+                                ${orgEvents.length > 3 ? `<p class="text-gray">...и еще ${orgEvents.length - 3} мероприятий</p>` : ''}
+                            </div>
+                        ` : ''}
+                        
+                        ${org.contact || org.website ? `
+                            <div style="margin-bottom: 25px;">
+                                <h4>Контакты</h4>
+                                ${org.contact ? `<p><i class="fas fa-envelope"></i> ${org.contact}</p>` : ''}
+                                ${org.website ? `<p><i class="fas fa-globe"></i> <a href="${org.website}" target="_blank" class="text-primary">${org.website}</a></p>` : ''}
+                            </div>
+                        ` : ''}
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-primary" id="follow-org-btn" data-id="${org.id}">
+                            <i class="fas fa-bell"></i> Следить за организацией
+                        </button>
+                        <button class="btn btn-outline" id="org-events-btn" data-id="${org.id}">
+                            <i class="fas fa-calendar-alt"></i> Все мероприятия
+                        </button>
+                    </div>
+                `;
+            }
+        };
+
+        const BlogView = {
+            renderPosts(posts, containerId) {
+                const container = document.getElementById(containerId);
+                if (!container) return;
+                
+                container.innerHTML = posts.map(post => {
+                    const date = new Date(post.date);
+                    const formattedDate = date.toLocaleDateString('ru-RU', {
+                        day: 'numeric',
+                        month: 'long',
+                        year: 'numeric'
+                    });
+                    
+                    return `
+                        <div class="blog-card" data-id="${post.id}">
+                            <div class="blog-image" style="background-image: url('${post.image}');"></div>
+                            <div class="blog-content">
+                                <span class="blog-category">${post.category}</span>
+                                <div class="blog-date">
+                                    <i class="far fa-calendar"></i> ${formattedDate}
+                                    <span style="margin-left: auto; font-size: 0.85rem;">
+                                        <i class="far fa-eye"></i> ${post.views} 
+                                        <i class="far fa-heart" style="margin-left: 10px;"></i> ${post.likes}
+                                    </span>
+                                </div>
+                                <h3>${post.title}</h3>
+                                <p>${post.excerpt}</p>
+                                <button class="btn btn-outline view-blog" data-id="${post.id}" style="width: 100%;">
+                                    <i class="fas fa-book-open"></i> Читать далее
+                                </button>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+                
+                // Add event listeners
+                document.querySelectorAll('.view-blog').forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        const postId = parseInt(this.getAttribute('data-id'));
+                        BlogController.showPostDetails(postId);
+                    });
+                });
+            },
+            
+            renderPostDetails(post) {
+                const date = new Date(post.date);
+                const formattedDate = date.toLocaleDateString('ru-RU', {
+                    day: 'numeric',
+                    month: 'long',
+                    year: 'numeric'
+                });
+                
+                return `
+                    <div class="modal-header">
+                        <h2>${post.title}</h2>
+                        <p class="text-gray">
+                            <i class="far fa-calendar"></i> ${formattedDate} • 
+                            <i class="fas fa-user-edit"></i> ${post.author} (${post.authorRole})
+                        </p>
+                    </div>
+                    <div class="modal-body">
+                        <div style="margin-bottom: 25px; text-align: center;">
+                            <img src="${post.image}" alt="${post.title}" style="width: 100%; max-height: 300px; object-fit: cover; border-radius: var(--border-radius);">
+                        </div>
+                        
+                        <div style="display: flex; gap: 20px; margin-bottom: 25px; flex-wrap: wrap;">
+                            <div style="display: inline-block; background-color: rgba(76, 175, 80, 0.1); color: var(--primary-color); padding: 5px 15px; border-radius: 20px; font-weight: 600;">
+                                ${post.category}
+                            </div>
+                            <div style="display: flex; gap: 15px; color: var(--gray-color);">
+                                <span><i class="far fa-eye"></i> ${post.views} просмотров</span>
+                                <span><i class="far fa-heart"></i> ${post.likes} лайков</span>
+                            </div>
+                        </div>
+                        
+                        <div style="margin-bottom: 30px; line-height: 1.7;">
+                            ${post.content}
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-primary" id="like-post-btn" data-id="${post.id}">
+                            <i class="far fa-heart"></i> Нравится (${post.likes})
+                        </button>
+                        <button class="btn btn-outline" id="share-post-btn" data-id="${post.id}">
+                            <i class="fas fa-share-alt"></i> Поделиться
+                        </button>
+                    </div>
+                `;
+            }
+        };
+
+        const GalleryView = {
+            items: [
+                {
+                    id: 1,
+                    image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80",
+                    caption: "Волонтеры убирают городской парк"
+                },
+                {
+                    id: 2,
+                    image: "https://images.unsplash.com/photo-1560743641-3914f2c45636?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80",
+                    caption: "Забота о бездомных животных в приюте"
+                },
+                {
+                    id: 3,
+                    image: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80",
+                    caption: "Проведение образовательных мастер-классов"
+                },
+                {
+                    id: 4,
+                    image: "https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80",
+                    caption: "Волонтеры помогают пожилым людям"
+                },
+                {
+                    id: 5,
+                    image: "https://images.unsplash.com/photo-1581276879432-15e50529f34b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80",
+                    caption: "Удаленная помощь через онлайн-платформы"
+                },
+                {
+                    id: 6,
+                    image: "https://images.unsplash.com/photo-1536939459926-301728717817?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80",
+                    caption: "Экологическая акция по сбору мусора"
+                }
+            ],
+            
+            currentIndex: 0,
+            isAnimating: false,
+            
+            init() {
+                this.renderCarousel();
+                this.setupControls();
+                this.startAutoRotate();
+            },
+            
+            renderCarousel() {
+                const carousel = document.getElementById('carousel');
+                const dotsContainer = document.getElementById('carousel-dots');
+                
+                if (!carousel || !dotsContainer) return;
+                
+                carousel.innerHTML = '';
+                dotsContainer.innerHTML = '';
+                
+                this.items.forEach((item, index) => {
+                    // Calculate position for 3D carousel
+                    const angle = (index / this.items.length) * 360;
+                    const rotateY = `rotateY(${angle}deg)`;
+                    const translateZ = 'translateZ(400px)';
+                    
+                    const carouselItem = document.createElement('div');
+                    carouselItem.className = 'carousel-item';
+                    carouselItem.style.transform = `${rotateY} ${translateZ}`;
+                    carouselItem.setAttribute('data-index', index);
+                    
+                    carouselItem.innerHTML = `
+                        <img src="${item.image}" alt="${item.caption}" loading="lazy">
+                        <div class="carousel-caption">${item.caption}</div>
+                    `;
+                    
+                    carousel.appendChild(carouselItem);
+                    
+                    // Create dot
+                    const dot = document.createElement('button');
+                    dot.className = `carousel-dot ${index === 0 ? 'active' : ''}`;
+                    dot.setAttribute('data-index', index);
+                    dot.addEventListener('click', () => {
+                        this.rotateToIndex(index);
+                    });
+                    dotsContainer.appendChild(dot);
+                });
+                
+                this.updateCarouselPosition();
+            },
+            
+            rotateToIndex(index) {
+                if (this.isAnimating || index === this.currentIndex) return;
+                
+                this.isAnimating = true;
+                this.currentIndex = index;
+                this.updateCarouselPosition();
+                
+                // Update active dot
+                document.querySelectorAll('.carousel-dot').forEach((dot, i) => {
+                    dot.classList.toggle('active', i === index);
+                });
+                
+                setTimeout(() => {
+                    this.isAnimating = false;
+                }, 500);
+            },
+            
+            rotateNext() {
+                const nextIndex = (this.currentIndex + 1) % this.items.length;
+                this.rotateToIndex(nextIndex);
+            },
+            
+            rotatePrev() {
+                const prevIndex = (this.currentIndex - 1 + this.items.length) % this.items.length;
+                this.rotateToIndex(prevIndex);
+            },
+            
+            updateCarouselPosition() {
+                const carousel = document.getElementById('carousel');
+                if (!carousel) return;
+                
+                const angle = -(this.currentIndex / this.items.length) * 360;
+                carousel.style.transform = `rotateY(${angle}deg)`;
+            },
+            
+            setupControls() {
+                const prevBtn = document.getElementById('carousel-prev');
+                const nextBtn = document.getElementById('carousel-next');
+                
+                if (prevBtn) {
+                    prevBtn.addEventListener('click', () => {
+                        this.rotatePrev();
+                        this.resetAutoRotate();
+                    });
+                }
+                
+                if (nextBtn) {
+                    nextBtn.addEventListener('click', () => {
+                        this.rotateNext();
+                        this.resetAutoRotate();
+                    });
+                }
+                
+                // Pause on hover
+                const carousel = document.getElementById('carousel');
+                if (carousel) {
+                    carousel.addEventListener('mouseenter', () => {
+                        this.pauseAutoRotate();
+                    });
+                    
+                    carousel.addEventListener('mouseleave', () => {
+                        this.resumeAutoRotate();
+                    });
+                }
+            },
+            
+            startAutoRotate() {
+                this.autoRotateInterval = setInterval(() => {
+                    this.rotateNext();
+                }, 4000);
+            },
+            
+            pauseAutoRotate() {
+                if (this.autoRotateInterval) {
+                    clearInterval(this.autoRotateInterval);
+                    this.autoRotateInterval = null;
+                }
+            },
+            
+            resumeAutoRotate() {
+                if (!this.autoRotateInterval) {
+                    this.startAutoRotate();
+                }
+            },
+            
+            resetAutoRotate() {
+                this.pauseAutoRotate();
+                this.resumeAutoRotate();
+            }
+        };
+
+        // ========================
+        // CONTROLLERS
+        // ========================
+        const EventController = {
+            currentFilter: 'all',
+            
+            init() {
+                this.loadEvents();
+                this.setupEventListeners();
+            },
+            
+            loadEvents() {
+                const events = EventModel.getFilteredEvents(this.currentFilter);
+                EventView.renderEvents(events, 'events-container');
+            },
+            
+            filterEvents(filter) {
+                this.currentFilter = filter;
+                this.loadEvents();
+            },
+            
+            showEventDetails(eventId) {
+                const event = EventModel.events.find(e => e.id === eventId);
+                if (!event) return;
+                
+                const modalContent = document.getElementById('event-modal-content');
+                modalContent.innerHTML = EventView.renderEventDetails(event);
+                
+                const modal = document.getElementById('event-modal');
+                modal.style.display = 'flex';
+                
+                // Add event listeners to buttons in modal
+                setTimeout(() => {
+                    const joinBtn = document.getElementById('join-event-btn');
+                    if (joinBtn) {
+                        joinBtn.addEventListener('click', () => {
+                            this.joinEvent(eventId);
+                        });
+                    }
+                    
+                    const shareBtn = document.getElementById('share-event-btn');
+                    if (shareBtn) {
+                        shareBtn.addEventListener('click', () => {
+                            this.shareEvent(eventId);
+                        });
+                    }
+                }, 100);
+            },
+            
+            joinEvent(eventId) {
+                if (!UserModel.isAuthenticated) {
+                    showToast('Для участия в мероприятии необходимо войти в систему', 'info');
+                    openModal('login');
+                    return;
+                }
+                
+                const success = EventModel.joinEvent(eventId, UserModel.currentUser.id);
+                if (success) {
+                    showToast('Вы успешно присоединились к мероприятию!', 'success');
+                    this.loadEvents();
+                    
+                    // Update modal if it's open
+                    const modal = document.getElementById('event-modal');
+                    if (modal.style.display === 'flex') {
+                        this.showEventDetails(eventId);
+                    }
+                } else {
+                    showToast('Не удалось присоединиться к мероприятию', 'error');
+                }
+            },
+            
+            shareEvent(eventId) {
+                const event = EventModel.events.find(e => e.id === eventId);
+                if (!event) return;
+                
+                const shareText = `Присоединяйтесь к мероприятию "${event.title}" на платформе "Добро вместе"!`;
+                const shareUrl = window.location.origin + '?event=' + eventId;
+                
+                if (navigator.share) {
+                    navigator.share({
+                        title: event.title,
+                        text: shareText,
+                        url: shareUrl
+                    });
+                } else {
+                    // Fallback: copy to clipboard
+                    navigator.clipboard.writeText(`${shareText} ${shareUrl}`)
+                        .then(() => showToast('Ссылка скопирована в буфер обмена', 'success'))
+                        .catch(() => showToast('Не удалось скопировать ссылку', 'error'));
+                }
+            },
+            
+            createEvent(eventData) {
+                if (!UserModel.isAuthenticated) {
+                    showToast('Для создания мероприятия необходимо войти в систему', 'info');
+                    openModal('login');
+                    return false;
+                }
+                
+                try {
+                    const newEvent = EventModel.createEvent(eventData);
+                    showToast('Мероприятие успешно создано!', 'success');
+                    this.loadEvents();
+                    return newEvent;
+                } catch (error) {
+                    showToast('Ошибка при создании мероприятия', 'error');
+                    return false;
+                }
+            },
+            
+            setupEventListeners() {
+                // Filter buttons
+                document.querySelectorAll('.filter-btn').forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                        btn.classList.add('active');
+                        
+                        const filter = btn.getAttribute('data-filter');
+                        this.filterEvents(filter);
+                    });
+                });
+                
+                // Search events
+                const searchInput = document.getElementById('search-events');
+                const searchBtn = document.getElementById('search-btn');
+                
+                if (searchInput && searchBtn) {
+                    const performSearch = () => {
+                        const query = searchInput.value.toLowerCase().trim();
+                        if (!query) {
+                            this.filterEvents(this.currentFilter);
+                            return;
+                        }
+                        
+                        const filteredEvents = EventModel.events.filter(event => 
+                            event.title.toLowerCase().includes(query) ||
+                            event.description.toLowerCase().includes(query) ||
+                            event.city.toLowerCase().includes(query) ||
+                            event.category.toLowerCase().includes(query)
+                        );
+                        
+                        EventView.renderEvents(filteredEvents, 'events-container');
+                    };
+                    
+                    searchBtn.addEventListener('click', performSearch);
+                    searchInput.addEventListener('keypress', (e) => {
+                        if (e.key === 'Enter') performSearch();
+                    });
+                }
+                
+                // Load more events
+                const loadMoreBtn = document.getElementById('load-more-events');
+                if (loadMoreBtn) {
+                    loadMoreBtn.addEventListener('click', () => {
+                        // In a real app, this would load more events from the server
+                        showToast('Загружаем больше мероприятий...', 'info');
+                        setTimeout(() => {
+                            showToast('Дополнительные мероприятия загружены', 'success');
+                        }, 1000);
+                    });
+                }
+                
+                // Create event button
+                const createEventBtn = document.getElementById('create-event-btn');
+                if (createEventBtn) {
+                    createEventBtn.addEventListener('click', () => {
+                        if (!UserModel.isAuthenticated) {
+                            showToast('Для создания мероприятия необходимо войти в систему', 'info');
+                            openModal('login');
+                            return;
+                        }
+                        openModal('create-event');
+                    });
+                }
+                
+                // Create event form
+                const createEventForm = document.getElementById('create-event-form');
+                if (createEventForm) {
+                    createEventForm.addEventListener('submit', (e) => {
+                        e.preventDefault();
+                        
+                        const eventData = {
+                            title: document.getElementById('event-title').value,
+                            description: document.getElementById('event-description').value,
+                            category: document.getElementById('event-category').value,
+                            date: document.getElementById('event-date').value,
+                            location: document.getElementById('event-location').value,
+                            city: document.getElementById('event-city').value,
+                            volunteersNeeded: parseInt(document.getElementById('event-volunteers').value),
+                            online: document.getElementById('event-online').checked,
+                            image: `https://images.unsplash.com/photo-${Math.floor(Math.random() * 1000000)}?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80`
+                        };
+                        
+                        const success = this.createEvent(eventData);
+                        if (success) {
+                            closeModal('create-event');
+                            createEventForm.reset();
+                        }
+                    });
+                }
+            }
+        };
+
+        const OrganizationController = {
+            init() {
+                this.loadOrganizations();
+            },
+            
+            loadOrganizations() {
+                OrganizationView.renderOrganizations(OrganizationModel.organizations, 'organizations-container');
+            },
+            
+            showOrganizationDetails(orgId) {
+                const org = OrganizationModel.organizations.find(o => o.id === orgId);
+                if (!org) return;
+                
+                const modalContent = document.getElementById('event-modal-content');
+                modalContent.innerHTML = OrganizationView.renderOrganizationDetails(org);
+                
+                const modal = document.getElementById('event-modal');
+                modal.style.display = 'flex';
+                
+                // Add event listeners to buttons in modal
+                setTimeout(() => {
+                    const followBtn = document.getElementById('follow-org-btn');
+                    if (followBtn) {
+                        followBtn.addEventListener('click', () => {
+                            this.followOrganization(orgId);
+                        });
+                    }
+                    
+                    const eventsBtn = document.getElementById('org-events-btn');
+                    if (eventsBtn) {
+                        eventsBtn.addEventListener('click', () => {
+                            this.showOrganizationEvents(orgId);
+                        });
+                    }
+                    
+                    // Add event listeners to event links
+                    document.querySelectorAll('.view-event-from-org').forEach(link => {
+                        link.addEventListener('click', (e) => {
+                            e.preventDefault();
+                            const eventId = parseInt(link.getAttribute('data-id'));
+                            closeModal('event');
+                            EventController.showEventDetails(eventId);
+                        });
+                    });
+                }, 100);
+            },
+            
+            followOrganization(orgId) {
+                if (!UserModel.isAuthenticated) {
+                    showToast('Для подписки на организацию необходимо войти в систему', 'info');
+                    openModal('login');
+                    return;
+                }
+                
+                showToast('Теперь вы следите за организацией!', 'success');
+            },
+            
+            showOrganizationEvents(orgId) {
+                EventController.filterEvents('all');
+                navigateToSection('events');
+                closeModal('event');
+                
+                // In a real app, we would filter events by organization
+                showToast('Показаны мероприятия организации', 'info');
+            }
+        };
+
+        const BlogController = {
+            init() {
+                this.loadPosts();
+            },
+            
+            loadPosts() {
+                BlogView.renderPosts(BlogModel.posts, 'blog-container');
+            },
+            
+            showPostDetails(postId) {
+                const post = BlogModel.posts.find(p => p.id === postId);
+                if (!post) return;
+                
+                const modalContent = document.getElementById('event-modal-content');
+                modalContent.innerHTML = BlogView.renderPostDetails(post);
+                
+                const modal = document.getElementById('event-modal');
+                modal.style.display = 'flex';
+                
+                // Add event listeners to buttons in modal
+                setTimeout(() => {
+                    const likeBtn = document.getElementById('like-post-btn');
+                    if (likeBtn) {
+                        likeBtn.addEventListener('click', () => {
+                            this.likePost(postId);
+                        });
+                    }
+                    
+                    const shareBtn = document.getElementById('share-post-btn');
+                    if (shareBtn) {
+                        shareBtn.addEventListener('click', () => {
+                            this.sharePost(postId);
+                        });
+                    }
+                }, 100);
+            },
+            
+            likePost(postId) {
+                if (!UserModel.isAuthenticated) {
+                    showToast('Для оценки поста необходимо войти в систему', 'info');
+                    openModal('login');
+                    return;
+                }
+                
+                const post = BlogModel.posts.find(p => p.id === postId);
+                if (post) {
+                    post.likes++;
+                    this.showPostDetails(postId);
+                    showToast('Спасибо за вашу оценку!', 'success');
+                }
+            },
+            
+            sharePost(postId) {
+                const post = BlogModel.posts.find(p => p.id === postId);
+                if (!post) return;
+                
+                const shareText = `Прочитайте статью "${post.title}" на платформе "Добро вместе"!`;
+                const shareUrl = window.location.origin + '?post=' + postId;
+                
+                if (navigator.share) {
+                    navigator.share({
+                        title: post.title,
+                        text: shareText,
+                        url: shareUrl
+                    });
+                } else {
+                    navigator.clipboard.writeText(`${shareText} ${shareUrl}`)
+                        .then(() => showToast('Ссылка скопирована в буфер обмена', 'success'))
+                        .catch(() => showToast('Не удалось скопировать ссылку', 'error'));
+                }
+            }
+        };
+
+        const AuthController = {
+            init() {
+                this.setupEventListeners();
+            },
+            
+            login(email, password) {
+                showLoading();
+                
+                UserModel.login(email, password)
+                    .then(user => {
+                        hideLoading();
+                        showToast('Вход выполнен успешно!', 'success');
+                        updateUserUI();
+                        closeModal('login');
+                    })
+                    .catch(error => {
+                        hideLoading();
+                        showToast(error.message, 'error');
+                    });
+            },
+            
+            register(userData) {
+                showLoading();
+                
+                UserModel.register(userData)
+                    .then(user => {
+                        hideLoading();
+                        showToast('Регистрация завершена успешно!', 'success');
+                        updateUserUI();
+                        closeModal('register');
+                    })
+                    .catch(error => {
+                        hideLoading();
+                        showToast('Ошибка при регистрации', 'error');
+                    });
+            },
+            
+            logout() {
+                UserModel.logout();
+                showToast('Вы вышли из системы', 'info');
+                updateUserUI();
+            },
+            
+            setupEventListeners() {
+                // Login form
+                const loginForm = document.getElementById('login-form');
+                if (loginForm) {
+                    loginForm.addEventListener('submit', (e) => {
+                        e.preventDefault();
+                        
+                        const email = document.getElementById('login-email').value;
+                        const password = document.getElementById('login-password').value;
+                        
+                        if (!email || !password) {
+                            showToast('Заполните все поля', 'error');
+                            return;
+                        }
+                        
+                        this.login(email, password);
+                    });
+                }
+                
+                // Register form
+                const registerForm = document.getElementById('register-form');
+                if (registerForm) {
+                    registerForm.addEventListener('submit', (e) => {
+                        e.preventDefault();
+                        
+                        const name = document.getElementById('register-name').value;
+                        const email = document.getElementById('register-email').value;
+                        const password = document.getElementById('register-password').value;
+                        const confirmPassword = document.getElementById('register-confirm').value;
+                        const city = document.getElementById('register-city').value;
+                        
+                        if (!name || !email || !password || !confirmPassword || !city) {
+                            showToast('Заполните все обязательные поля', 'error');
+                            return;
+                        }
+                        
+                        if (password !== confirmPassword) {
+                            showToast('Пароли не совпадают', 'error');
+                            return;
+                        }
+                        
+                        if (password.length < 8) {
+                            showToast('Пароль должен содержать не менее 8 символов', 'error');
+                            return;
+                        }
+                        
+                        // Get selected interests
+                        const interests = [];
+                        document.querySelectorAll('.interests-grid input:checked').forEach(checkbox => {
+                            interests.push(checkbox.value);
+                        });
+                        
+                        const userData = {
+                            name: name,
+                            email: email,
+                            password: password,
+                            city: city,
+                            interests: interests
+                        };
+                        
+                        this.register(userData);
+                    });
+                    
+                    // Password strength indicator
+                    const passwordInput = document.getElementById('register-password');
+                    if (passwordInput) {
+                        passwordInput.addEventListener('input', function() {
+                            const password = this.value;
+                            const strengthBar = document.getElementById('password-strength-bar');
+                            const strengthText = document.getElementById('password-strength-text');
+                            
+                            let strength = 0;
+                            let color = '#f44336';
+                            let text = 'Слабый';
+                            
+                            if (password.length >= 8) strength += 25;
+                            if (/[A-Z]/.test(password)) strength += 25;
+                            if (/[0-9]/.test(password)) strength += 25;
+                            if (/[^A-Za-z0-9]/.test(password)) strength += 25;
+                            
+                            if (strength >= 75) {
+                                color = '#4CAF50';
+                                text = 'Сильный';
+                            } else if (strength >= 50) {
+                                color = '#FF9800';
+                                text = 'Средний';
+                            }
+                            
+                            if (strengthBar) {
+                                strengthBar.style.width = strength + '%';
+                                strengthBar.style.backgroundColor = color;
+                            }
+                            
+                            if (strengthText) {
+                                strengthText.textContent = text;
+                                strengthText.style.color = color;
+                            }
+                        });
+                    }
+                }
+                
+                // Logout button
+                const logoutBtn = document.getElementById('logout-btn');
+                if (logoutBtn) {
+                    logoutBtn.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        this.logout();
+                    });
+                }
+                
+                // Forgot password
+                const forgotPasswordBtn = document.getElementById('forgot-password');
+                if (forgotPasswordBtn) {
+                    forgotPasswordBtn.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        showToast('Функция восстановления пароля будет доступна в ближайшее время', 'info');
+                    });
+                }
+            }
+        };
+
+        const ChatController = {
+            messages: [
+                { id: 1, text: "Привет! Добро пожаловать в чат волонтеров!", sender: "system", time: "10:00" },
+                { id: 2, text: "Здесь вы можете общаться с другими участниками платформы, задавать вопросы и делиться опытом.", sender: "system", time: "10:01" },
+                { id: 3, text: "Привет! Я новичок, с чего лучше начать?", sender: "user", time: "10:05" },
+                { id: 4, text: "Начните с поиска мероприятий по своим интересам. Рекомендую сначала выбрать онлайн-мероприятия, чтобы познакомиться с процессом.", sender: "system", time: "10:06" }
+            ],
+            
+            onlineUsers: 25,
+            isOpen: false,
+            unreadCount: 0,
+            
+            init() {
+                this.renderMessages();
+                this.setupEventListeners();
+                this.updateOnlineCount();
+                this.simulateUserActivity();
+            },
+            
+            renderMessages() {
+                const container = document.getElementById('chat-messages');
+                if (!container) return;
+                
+                container.innerHTML = this.messages.map(msg => {
+                    const isSent = msg.sender === 'user';
+                    return `
+                        <div class="message ${isSent ? 'sent' : 'received'}">
+                            ${msg.text}
+                            <div class="message-time">${msg.time}</div>
+                        </div>
+                    `;
+                }).join('');
+                
+                // Scroll to bottom
+                container.scrollTop = container.scrollHeight;
+            },
+            
+            sendMessage(text) {
+                if (!text.trim()) return;
+                
+                // Add user message
+                const now = new Date();
+                const time = now.toLocaleTimeString('ru-RU', {
+                    hour: '2-digit',
+                    minute: '2-digit'
+                });
+                
+                this.messages.push({
+                    id: this.messages.length + 1,
+                    text: text,
+                    sender: 'user',
+                    time: time
+                });
+                
+                this.renderMessages();
+                
+                // Simulate response after delay
+                setTimeout(() => {
+                    this.addBotResponse();
+                }, 1000 + Math.random() * 2000);
+            },
+            
+            addBotResponse() {
+                const responses = [
+                    "Спасибо за ваше сообщение!",
+                    "Интересная идея!",
+                    "Как я могу помочь?",
+                    "Присоединяйтесь к нашему следующему мероприятию!",
+                    "Отличная мысль, я передам её организаторам!",
+                    "Вы из какого города? Есть ли у вас возможность участвовать в оффлайн мероприятиях?",
+                    "Рекомендую посмотреть мероприятия в категории 'Экология', там всегда нужна помощь!",
+                    "Не забывайте отслеживать свои достижения в личном кабинете!",
+                    "Хотите узнать больше о волонтерстве в Краснодарском крае?",
+                    "Вы уже участвовали в наших мероприятиях? Поделитесь впечатлениями!"
+                ];
+                
+                const randomResponse = responses[Math.floor(Math.random() * responses.length)];
+                const now = new Date();
+                const time = now.toLocaleTimeString('ru-RU', {
+                    hour: '2-digit',
+                    minute: '2-digit'
+                });
+                
+                this.messages.push({
+                    id: this.messages.length + 1,
+                    text: randomResponse,
+                    sender: 'system',
+                    time: time
+                });
+                
+                this.renderMessages();
+                
+                // If chat is closed, show notification
+                if (!this.isOpen) {
+                    this.unreadCount++;
+                    this.updateNotificationBadge();
+                }
+            },
+            
+            updateOnlineCount() {
+                // Simulate changing online count
+                setInterval(() => {
+                    const change = Math.floor(Math.random() * 5) - 2;
+                    this.onlineUsers = Math.max(10, this.onlineUsers + change);
+                    
+                    const onlineCountElement = document.getElementById('online-count');
+                    if (onlineCountElement) {
+                        onlineCountElement.textContent = `${this.onlineUsers} онлайн`;
+                    }
+                }, 10000);
+            },
+            
+            simulateUserActivity() {
+                // Simulate other users joining the conversation
+                setInterval(() => {
+                    if (Math.random() > 0.7 && this.isOpen) {
+                        const userMessages = [
+                            "Кто-нибудь участвовал в уборке парка в субботу?",
+                            "Ищу волонтеров для помощи в приюте животных",
+                            "Есть идеи для онлайн-мероприятий?",
+                            "Как стать организатором мероприятия?",
+                            "Кто из Краснодара здесь?"
+                        ];
+                        
+                        const randomMessage = userMessages[Math.floor(Math.random() * userMessages.length)];
+                        const now = new Date();
+                        const time = now.toLocaleTimeString('ru-RU', {
+                            hour: '2-digit',
+                            minute: '2-digit'
+                        });
+                        
+                        this.messages.push({
+                            id: this.messages.length + 1,
+                            text: randomMessage,
+                            sender: 'other',
+                            time: time
+                        });
+                        
+                        this.renderMessages();
+                    }
+                }, 15000);
+            },
+            
+            updateNotificationBadge() {
+                const badge = document.getElementById('chat-notification');
+                if (!badge) return;
+                
+                if (this.unreadCount > 0) {
+                    badge.textContent = this.unreadCount > 9 ? '9+' : this.unreadCount;
+                    badge.style.display = 'flex';
+                } else {
+                    badge.style.display = 'none';
+                }
+            },
+            
+            openChat() {
+                this.isOpen = true;
+                this.unreadCount = 0;
+                this.updateNotificationBadge();
+                
+                const chatWidget = document.getElementById('chat-widget');
+                const chatToggle = document.getElementById('chat-toggle');
+                
+                if (chatWidget) chatWidget.style.display = 'flex';
+                if (chatToggle) chatToggle.style.display = 'none';
+            },
+            
+            closeChat() {
+                this.isOpen = false;
+                
+                const chatWidget = document.getElementById('chat-widget');
+                const chatToggle = document.getElementById('chat-toggle');
+                
+                if (chatWidget) chatWidget.style.display = 'none';
+                if (chatToggle) chatToggle.style.display = 'flex';
+            },
+            
+            setupEventListeners() {
+                // Chat toggle
+                const chatToggle = document.getElementById('chat-toggle');
+                if (chatToggle) {
+                    chatToggle.addEventListener('click', () => {
+                        this.openChat();
+                    });
+                }
+                
+                // Close chat
+                const closeChat = document.getElementById('close-chat');
+                if (closeChat) {
+                    closeChat.addEventListener('click', () => {
+                        this.closeChat();
+                    });
+                }
+                
+                // Send message
+                const sendBtn = document.getElementById('send-message');
+                const chatInput = document.getElementById('chat-input');
+                
+                if (sendBtn && chatInput) {
+                    const sendMessageHandler = () => {
+                        const text = chatInput.value.trim();
+                        if (text) {
+                            this.sendMessage(text);
+                            chatInput.value = '';
+                        }
+                    };
+                    
+                    sendBtn.addEventListener('click', sendMessageHandler);
+                    chatInput.addEventListener('keypress', (e) => {
+                        if (e.key === 'Enter') {
+                            sendMessageHandler();
+                        }
+                    });
+                }
+            }
+        };
+
+        // ========================
+        // UTILITY FUNCTIONS
+        // ========================
+        function initApp() {
+            // Initialize models
+            UserModel.init();
+            
+            // Initialize views
+            GalleryView.init();
+            EventController.init();
+            OrganizationController.init();
+            BlogController.init();
+            AuthController.init();
+            ChatController.init();
+            
+            // Setup UI
+            setupNavigation();
+            setupModals();
+            setupCityMarkers();
+            setupToast();
+            
+            // Update UI based on auth state
+            updateUserUI();
+        }
+
+        function updateUserUI() {
+            const userToggle = document.getElementById('user-toggle');
+            const userName = document.getElementById('user-name');
+            const userAvatar = document.getElementById('user-avatar');
+            const loginBtn = document.getElementById('login-btn');
+            const registerBtn = document.getElementById('register-btn');
+            
+            if (UserModel.isAuthenticated && UserModel.currentUser) {
+                // User is logged in
+                if (userToggle) userToggle.style.display = 'flex';
+                if (userName) userName.textContent = UserModel.currentUser.name;
+                if (userAvatar) {
+                    userAvatar.textContent = UserModel.currentUser.avatar;
+                    userAvatar.style.backgroundColor = getColorFromName(UserModel.currentUser.name);
+                }
+                if (loginBtn) loginBtn.style.display = 'none';
+                if (registerBtn) registerBtn.style.display = 'none';
+            } else {
+                // User is not logged in
+                if (userToggle) userToggle.style.display = 'none';
+                if (loginBtn) loginBtn.style.display = 'block';
+                if (registerBtn) registerBtn.style.display = 'block';
+            }
+        }
+
+        function getColorFromName(name) {
+            const colors = [
+                '#4CAF50', '#2196F3', '#FF9800', '#9C27B0', 
+                '#F44336', '#00BCD4', '#8BC34A', '#FF5722'
+            ];
+            const index = name.charCodeAt(0) % colors.length;
+            return colors[index];
+        }
+
+        function setupNavigation() {
+            // Mobile menu toggle
+            const mobileToggle = document.getElementById('mobile-toggle');
+            const mainNav = document.getElementById('main-nav');
+            
+            if (mobileToggle && mainNav) {
+                mobileToggle.addEventListener('click', () => {
+                    mainNav.classList.toggle('active');
+                    mobileToggle.innerHTML = mainNav.classList.contains('active') 
+                        ? '<i class="fas fa-times"></i>' 
+                        : '<i class="fas fa-bars"></i>';
+                });
+            }
+            
+            // Navigation links
+            const navLinks = document.querySelectorAll('.nav-link');
+            navLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    
+                    // Close mobile menu if open
+                    if (mainNav && mainNav.classList.contains('active')) {
+                        mainNav.classList.remove('active');
+                        mobileToggle.innerHTML = '<i class="fas fa-bars"></i>';
+                    }
+                    
+                    // Update active link
+                    navLinks.forEach(l => l.classList.remove('active'));
+                    link.classList.add('active');
+                    
+                    // Navigate to section
+                    const section = link.getAttribute('data-section');
+                    navigateToSection(section);
+                });
+            });
+            
+            // Home link
+            const homeLink = document.getElementById('home-link');
+            if (homeLink) {
+                homeLink.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    navLinks.forEach(l => l.classList.remove('active'));
+                    document.querySelector('[data-section="home"]').classList.add('active');
+                    navigateToSection('home');
+                });
+            }
+            
+            // Footer navigation links
+            document.querySelectorAll('.footer-column a[data-section]').forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const section = link.getAttribute('data-section');
+                    
+                    // Update active nav link
+                    navLinks.forEach(l => l.classList.remove('active'));
+                    document.querySelector(`[data-section="${section}"]`).classList.add('active');
+                    
+                    // Navigate to section
+                    navigateToSection(section);
+                });
+            });
+        }
+
+        function navigateToSection(section) {
+            // Hide all sections
+            const sections = ['home', 'features', 'gallery', 'events', 'organizations', 'krasnodar', 'blog', 'about'];
+            sections.forEach(s => {
+                const element = document.getElementById(`${s}-section`);
+                if (element) element.style.display = 'none';
+            });
+            
+            // Show selected section
+            if (section === 'home') {
+                document.getElementById('home-section').style.display = 'block';
+                document.getElementById('features-section').style.display = 'block';
+                document.getElementById('gallery-section').style.display = 'block';
+            } else {
+                const targetSection = document.getElementById(`${section}-section`);
+                if (targetSection) {
+                    targetSection.style.display = 'block';
+                    // Smooth scroll to section
+                    setTimeout(() => {
+                        targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }, 100);
+                }
+            }
+        }
+
+        function setupModals() {
+            // Modal open/close functions
+            window.openModal = function(modalName) {
+                const modal = document.getElementById(`${modalName}-modal`);
+                if (modal) modal.style.display = 'flex';
+            };
+            
+            window.closeModal = function(modalName) {
+                const modal = document.getElementById(`${modalName}-modal`);
+                if (modal) modal.style.display = 'none';
+            };
+            
+            // Login/Register buttons
+            document.getElementById('login-btn')?.addEventListener('click', () => openModal('login'));
+            document.getElementById('register-btn')?.addEventListener('click', () => openModal('register'));
+            
+            // Close buttons
+            document.getElementById('close-login')?.addEventListener('click', () => closeModal('login'));
+            document.getElementById('close-register')?.addEventListener('click', () => closeModal('register'));
+            document.getElementById('close-event')?.addEventListener('click', () => closeModal('event'));
+            document.getElementById('close-create-event')?.addEventListener('click', () => closeModal('create-event'));
+            
+            // Modal switching
+            document.getElementById('switch-to-register')?.addEventListener('click', (e) => {
+                e.preventDefault();
+                closeModal('login');
+                openModal('register');
+            });
+            
+            document.getElementById('switch-to-login')?.addEventListener('click', (e) => {
+                e.preventDefault();
+                closeModal('register');
+                openModal('login');
+            });
+            
+            // Cancel create event
+            document.getElementById('cancel-create-event')?.addEventListener('click', () => {
+                closeModal('create-event');
+            });
+            
+            // Close modals when clicking outside
+            document.querySelectorAll('.modal').forEach(modal => {
+                modal.addEventListener('click', (e) => {
+                    if (e.target === modal) {
+                        const modalId = modal.id.replace('-modal', '');
+                        closeModal(modalId);
+                    }
+                });
+            });
+            
+            // Contact link
+            document.getElementById('contact-link')?.addEventListener('click', (e) => {
+                e.preventDefault();
+                showToast('Контактная форма будет доступна в ближайшее время', 'info');
+            });
+            
+            // Notifications link
+            document.getElementById('notifications-link')?.addEventListener('click', (e) => {
+                e.preventDefault();
+                showToast('Уведомления будут доступны в ближайшее время', 'info');
+            });
+            
+            // Settings link
+            document.getElementById('settings-link')?.addEventListener('click', (e) => {
+                e.preventDefault();
+                showToast('Настройки будут доступны в ближайшее время', 'info');
+            });
+        }
+
+        function setupCityMarkers() {
+            const cityMarkers = document.querySelectorAll('.city-marker');
+            
+            cityMarkers.forEach(marker => {
+                marker.addEventListener('click', function() {
+                    // Remove active class from all markers
+                    cityMarkers.forEach(m => m.classList.remove('active'));
+                    
+                    // Add active class to clicked marker
+                    this.classList.add('active');
+                    
+                    // Get city name
+                    const city = this.getAttribute('data-city');
+                    
+                    // Filter events by city/region
+                    if (city === 'krasnodar') {
+                        EventController.filterEvents('krasnodar');
+                        navigateToSection('events');
+                    } else {
+                        showToast(`Показаны мероприятия в городе ${this.querySelector('h4')?.textContent || ''}`, 'info');
+                        // In a real app, we would filter events by city
+                    }
+                });
+            });
+            
+            // Close city info when clicking elsewhere
+            document.addEventListener('click', (e) => {
+                if (!e.target.closest('.city-marker')) {
+                    cityMarkers.forEach(marker => marker.classList.remove('active'));
+                }
+            });
+        }
+
+        function setupToast() {
+            window.showToast = function(message, type = 'info') {
+                const toast = document.getElementById('toast');
+                const toastMessage = document.getElementById('toast-message');
+                
+                if (!toast || !toastMessage) return;
+                
+                // Set message and type
+                toastMessage.textContent = message;
+                toast.className = `toast toast-${type}`;
+                
+                // Show toast
+                toast.classList.remove('hidden');
+                
+                // Auto hide after 5 seconds
+                setTimeout(() => {
+                    toast.classList.add('hidden');
+                }, 5000);
+            };
+            
+            // Close toast button
+            const toastClose = document.getElementById('toast-close');
+            if (toastClose) {
+                toastClose.addEventListener('click', () => {
+                    document.getElementById('toast')?.classList.add('hidden');
+                });
+            }
+        }
+
+        function showLoading() {
+            // In a real app, this would show a loading spinner
+            console.log('Loading...');
+        }
+
+        function hideLoading() {
+            // In a real app, this would hide the loading spinner
+            console.log('Loading complete');
+        }
+
+        // Initialize the app when DOM is loaded
+        document.addEventListener('DOMContentLoaded', initApp);
+    </script>
+</body>
+</html>
